@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<robot name="max" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <link name="base_footprint"/>
+    <link name="base_link">
+        <inertial>
+            <origin xyz="-0.008949251381261427 2.0808612371678153e-17 0.10071250738095076" rpy="0 0 0"/>
+            <mass value="8.307942395442693"/>
+            <inertia ixx="0.041631" iyy="0.061003" izz="0.073974" ixy="-0.0" iyz="-0.0" ixz="0.002477"/>
+        </inertial>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+            <mesh filename="file://$(find max_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="silver"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+            <mesh filename="file://$(find max_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+    </link>
+    <joint name="base_joint" type="fixed">
+        <parent link="base_footprint"/>
+        <child link="base_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+</robot>
