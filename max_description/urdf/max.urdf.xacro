@@ -3,6 +3,7 @@
 <robot name="max" xmlns:xacro="http://www.ros.org/wiki/xacro">
     
     <xacro:include filename="$(find max_description)/urdf/materials.xacro" />
+    <xacro:include filename="$(find max_description)/urdf/max.gazebo.xacro" />
 
     <link name="base_footprint"/>
     
@@ -22,7 +23,7 @@
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-            <mesh filename="file://$(find max_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+                <mesh filename="file://$(find max_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
             </geometry>
         </collision>
     </link>
@@ -36,14 +37,14 @@
         <visual>
             <origin xyz="-0.07309 -0.109 -0.0425" rpy="0 0 0"/>
             <geometry>
-            <mesh filename="file://$(find max_description)/meshes/fl_wheel_link.stl" scale="0.001 0.001 0.001"/>
+                <mesh filename="file://$(find max_description)/meshes/fl_wheel_link.stl" scale="0.001 0.001 0.001"/>
             </geometry>
             <material name="silver"/>
         </visual>
         <collision>
             <origin xyz="-0.07309 -0.109 -0.0425" rpy="0 0 0"/>
             <geometry>
-            <mesh filename="file://$(find max_description)/meshes/fl_wheel_link.stl" scale="0.001 0.001 0.001"/>
+                <sphere radius="0.0425"/>
             </geometry>
         </collision>
     </link>
@@ -64,7 +65,7 @@
         <collision>
             <origin xyz="-0.07309 0.109 -0.0425" rpy="0 0 0"/>
             <geometry>
-            <mesh filename="file://$(find max_description)/meshes/fr_wheel_link.stl" scale="0.001 0.001 0.001"/>
+                <sphere radius="0.0425"/>
             </geometry>
         </collision>
     </link>
@@ -85,7 +86,7 @@
         <collision>
             <origin xyz="0.0978 -0.109 -0.0425" rpy="0 0 0"/>
             <geometry>
-            <mesh filename="file://$(find max_description)/meshes/rl_wheel_link.stl" scale="0.001 0.001 0.001"/>
+                <sphere radius="0.0425"/>
             </geometry>
         </collision>
     </link>
@@ -106,7 +107,7 @@
         <collision>
             <origin xyz="0.0978 0.109 -0.0425" rpy="0 0 0"/>
             <geometry>
-            <mesh filename="file://$(find max_description)/meshes/rr_wheel_link.stl" scale="0.001 0.001 0.001"/>
+                <sphere radius="0.0425"/>
             </geometry>
         </collision>
     </link>
@@ -126,9 +127,6 @@
         </visual>
         <collision>
             <origin xyz="-0.0 -0.0 -0.204001" rpy="0 0 0"/>
-            <geometry>
-            <mesh filename="file://$(find max_description)/meshes/lidar_link.stl" scale="0.001 0.001 0.001"/>
-            </geometry>
         </collision>
     </link>
 
