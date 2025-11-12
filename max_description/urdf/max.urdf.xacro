@@ -10,7 +10,7 @@
             <inertia ixx="0.041631" iyy="0.061003" izz="0.073974" ixy="-0.0" iyz="-0.0" ixz="0.002477"/>
         </inertial>
         <visual>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <origin xyz="0 0 -0.0425" rpy="0 0 0"/>
             <geometry>
             <mesh filename="file://$(find max_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
             </geometry>
@@ -23,9 +23,122 @@
             </geometry>
         </collision>
     </link>
+
+    <link name="fl_wheel_link">
+        <inertial>
+            <origin xyz="4.163336342344337e-17 0.010504645034502769 0.0" rpy="0 0 0"/>
+            <mass value="0.16353745126830063"/>
+            <inertia ixx="8.7e-05" iyy="0.000148" izz="8.7e-05" ixy="0.0" iyz="0.0" ixz="0.0"/>
+        </inertial>
+        <visual>
+            <origin xyz="-0.07309 -0.109 -0.0425" rpy="0 0 0"/>
+            <geometry>
+            <mesh filename="file://$(find max_description)/meshes/fl_wheel_link.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="silver"/>
+        </visual>
+        <collision>
+            <origin xyz="-0.07309 -0.109 -0.0425" rpy="0 0 0"/>
+            <geometry>
+            <mesh filename="file://$(find max_description)/meshes/fl_wheel_link.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="fr_wheel_link">
+        <inertial>
+            <origin xyz="4.163336342344337e-17 -0.01050464503450281 -1.3877787807814457e-17" rpy="0 0 0"/>
+            <mass value="0.16353745126830063"/>
+            <inertia ixx="8.7e-05" iyy="0.000148" izz="8.7e-05" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
+        </inertial>
+        <visual>
+            <origin xyz="-0.07309 0.109 -0.0425" rpy="0 0 0"/>
+            <geometry>
+            <mesh filename="file://$(find max_description)/meshes/fr_wheel_link.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="silver"/>
+        </visual>
+        <collision>
+            <origin xyz="-0.07309 0.109 -0.0425" rpy="0 0 0"/>
+            <geometry>
+            <mesh filename="file://$(find max_description)/meshes/fr_wheel_link.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="rl_wheel_link">
+        <inertial>
+            <origin xyz="5.551115123125783e-17 0.010504645034502769 -1.3877787807814457e-17" rpy="0 0 0"/>
+            <mass value="0.16353745126830063"/>
+            <inertia ixx="8.7e-05" iyy="0.000148" izz="8.7e-05" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+        </inertial>
+        <visual>
+            <origin xyz="0.0978 -0.109 -0.0425" rpy="0 0 0"/>
+            <geometry>
+            <mesh filename="file://$(find max_description)/meshes/rl_wheel_link.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="silver"/>
+        </visual>
+        <collision>
+            <origin xyz="0.0978 -0.109 -0.0425" rpy="0 0 0"/>
+            <geometry>
+            <mesh filename="file://$(find max_description)/meshes/rl_wheel_link.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="rr_wheel_link">
+        <inertial>
+            <origin xyz="5.551115123125783e-17 -0.01050464503450281 -1.3877787807814457e-17" rpy="0 0 0"/>
+            <mass value="0.16353745126830063"/>
+            <inertia ixx="8.7e-05" iyy="0.000148" izz="8.7e-05" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+        </inertial>
+        <visual>
+            <origin xyz="0.0978 0.109 -0.0425" rpy="0 0 0"/>
+            <geometry>
+            <mesh filename="file://$(find max_description)/meshes/rr_wheel_link.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="silver"/>
+        </visual>
+        <collision>
+            <origin xyz="0.0978 0.109 -0.0425" rpy="0 0 0"/>
+            <geometry>
+            <mesh filename="file://$(find max_description)/meshes/rr_wheel_link.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+    </link>
+
     <joint name="base_joint" type="fixed">
         <parent link="base_footprint"/>
         <child link="base_link"/>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <origin xyz="0 0 0.0425" rpy="0 0 0"/>
+    </joint>
+
+    <joint name="fl_joint" type="continuous">
+        <origin xyz="0.07309 0.109 0" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="fl_wheel_link"/>
+        <axis xyz="0.0 1.0 0.0"/>
+    </joint>
+
+    <joint name="fr_joint" type="continuous">
+        <origin xyz="0.07309 -0.109 0" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="fr_wheel_link"/>
+        <axis xyz="0.0 -1.0 0.0"/>
+    </joint>
+
+    <joint name="rl_joint" type="continuous">
+        <origin xyz="-0.0978 0.109 0" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="rl_wheel_link"/>
+        <axis xyz="0.0 1.0 0.0"/>
+    </joint>
+
+    <joint name="rr_joint" type="continuous">
+        <origin xyz="-0.0978 -0.109 0" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="rr_wheel_link"/>
+        <axis xyz="0.0 -1.0 0.0"/>
     </joint>
 </robot>
