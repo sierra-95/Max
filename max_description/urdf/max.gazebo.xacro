@@ -1,42 +1,50 @@
 <?xml version="1.0" ?>
 <robot name="max" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+  <xacro:property name="body_color" value="Gazebo/Silver" />
+  <gazebo>
+    <plugin name="control" filename="libgazebo_ros_control.so"/>
+  </gazebo>
+  <gazebo reference="base_link">
+    <material>${body_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>true</self_collide>
+    <gravity>true</gravity>
+  </gazebo>
+
   <gazebo reference="fl_wheel_link">
-    <mu1>100000000000000.0</mu1>
-    <mu2>100000000000000.0</mu2>
-    <kp>1000000000000.0</kp>
-    <kd>10.0</kd>
-    <minDepth>0.001</minDepth>
-    <maxVel>0.1</maxVel>
-    <fdir1>1 0 0</fdir1>
+    <material>${body_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>true</self_collide>
   </gazebo>
 
   <gazebo reference="fr_wheel_link">
-    <mu1>100000000000000.0</mu1>
-    <mu2>100000000000000.0</mu2>
-    <kp>1000000000000.0</kp>
-    <kd>10.0</kd>
-    <minDepth>0.001</minDepth>
-    <maxVel>0.1</maxVel>
-    <fdir1>1 0 0</fdir1>
+    <material>${body_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>true</self_collide>
   </gazebo>
 
   <gazebo reference="rl_wheel_link">
-    <mu1>100000000000000.0</mu1>
-    <mu2>100000000000000.0</mu2>
-    <kp>1000000000000.0</kp>
-    <kd>10.0</kd>
-    <minDepth>0.001</minDepth>
-    <maxVel>0.1</maxVel>
-    <fdir1>1 0 0</fdir1>
+    <material>${body_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>true</self_collide>
   </gazebo>
 
   <gazebo reference="rr_wheel_link">
-    <mu1>100000000000000.0</mu1>
-    <mu2>100000000000000.0</mu2>
-    <kp>1000000000000.0</kp>
-    <kd>10.0</kd>
-    <minDepth>0.001</minDepth>
-    <maxVel>0.1</maxVel>
-    <fdir1>1 0 0</fdir1>
+    <material>${body_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>true</self_collide>
+  </gazebo>
+
+  <gazebo reference="lidar_link">
+    <material>${body_color}</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>true</self_collide>
   </gazebo>
 </robot>
