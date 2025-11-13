@@ -1,6 +1,19 @@
 <?xml version="1.0" ?>
 <robot name="max" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+    
+    <!-- Base body -->
     <material name="silver">
-    <color rgba="0.700 0.700 0.700 1.000"/>
+        <color rgba="0.700 0.700 0.700 1.000"/>
     </material>
+
+    <!-- Wheels -->
+    <material name="matte_black">
+        <color rgba="0.05 0.05 0.05 1.0"/>
+    </material>
+
+    <!-- Lidar -->
+    <material name="tech_blue">
+        <color rgba="0.0 0.3 0.6 1.0"/>
+    </material>
+    
 </robot>

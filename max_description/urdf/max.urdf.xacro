@@ -39,7 +39,7 @@
             <geometry>
                 <mesh filename="file://$(find max_description)/meshes/fl_wheel_link.stl" scale="0.001 0.001 0.001"/>
             </geometry>
-            <material name="silver"/>
+            <material name="matte_black"/>
         </visual>
         <collision>
             <origin xyz="-0.07309 -0.109 -0.0425" rpy="0 0 0"/>
@@ -60,7 +60,7 @@
             <geometry>
             <mesh filename="file://$(find max_description)/meshes/fr_wheel_link.stl" scale="0.001 0.001 0.001"/>
             </geometry>
-            <material name="silver"/>
+            <material name="matte_black"/>
         </visual>
         <collision>
             <origin xyz="-0.07309 0.109 -0.0425" rpy="0 0 0"/>
@@ -81,7 +81,7 @@
             <geometry>
             <mesh filename="file://$(find max_description)/meshes/rl_wheel_link.stl" scale="0.001 0.001 0.001"/>
             </geometry>
-            <material name="silver"/>
+            <material name="matte_black"/>
         </visual>
         <collision>
             <origin xyz="0.0978 -0.109 -0.0425" rpy="0 0 0"/>
@@ -102,7 +102,7 @@
             <geometry>
             <mesh filename="file://$(find max_description)/meshes/rr_wheel_link.stl" scale="0.001 0.001 0.001"/>
             </geometry>
-            <material name="silver"/>
+            <material name="matte_black"/>
         </visual>
         <collision>
             <origin xyz="0.0978 0.109 -0.0425" rpy="0 0 0"/>
@@ -123,7 +123,7 @@
             <geometry>
             <mesh filename="file://$(find max_description)/meshes/lidar_link.stl" scale="0.001 0.001 0.001"/>
             </geometry>
-            <material name="silver"/>
+            <material name="tech_blue"/>
         </visual>
         <collision>
             <origin xyz="-0.0 -0.0 -0.204001" rpy="0 0 0"/>
