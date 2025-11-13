@@ -3,6 +3,7 @@
 
   <xacro:property name="wheel_color" value="Gazebo/Black" />
   <xacro:property name="lidar_color" value="Gazebo/Blue" />
+  <xacro:property name="camera_color" value="Gazebo/Grey" />
   
   <gazebo reference="fl_wheel_link">
     <material>${wheel_color}</material>
@@ -50,6 +51,10 @@
 
   <gazebo reference="lidar_link">
     <material>${lidar_color}</material>
+  </gazebo>
+
+  <gazebo reference="camera_link_1">
+    <material>${camera_color}</material>
   </gazebo>
 
 </robot>

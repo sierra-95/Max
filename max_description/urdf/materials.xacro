@@ -15,5 +15,10 @@
     <material name="tech_blue">
         <color rgba="0.0 0.3 0.6 1.0"/>
     </material>
+
+    <!-- Camera -->
+    <material name="camera_accent">
+        <color rgba="0.0 0.5 1.0 1.0"/>
+    </material>
     
 </robot>

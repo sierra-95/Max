@@ -133,6 +133,27 @@
         </collision>
     </link>
 
+    <link name="camera_link">
+        <inertial>
+            <origin xyz="0.014490312898766358 3.7392359944188856e-16 -0.008993541932510896" rpy="0 0 0"/>
+            <mass value="1.7184205751165316"/>
+            <inertia ixx="0.00474" iyy="0.000448" izz="0.004472" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+        </inertial>
+        <visual>
+            <origin xyz="-0.1133 -0.0 -0.144" rpy="0 0 0"/>
+            <geometry>
+            <mesh filename="file://$(find max_description)/meshes/camera_link.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+            <material name="camera_accent"/>
+        </visual>
+        <collision>
+            <origin xyz="-0.1133 -0.0 -0.144" rpy="0 0 0"/>
+            <geometry>
+            <mesh filename="file://$(find max_description)/meshes/camera_link.stl" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </collision>
+    </link>
+
     <joint name="base_joint" type="fixed">
         <parent link="base_footprint"/>
         <child link="base_link"/>
@@ -172,5 +193,11 @@
         <parent link="base_link"/>
         <child link="lidar_link"/>
         <axis xyz="0 0 1"/>
+    </joint>
+
+    <joint name="camera_joint" type="fixed">
+        <origin xyz="0.1133 0.0 0.1015" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="camera_link"/>
     </joint>
 </robot>
