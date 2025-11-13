@@ -1,50 +1,55 @@
 <?xml version="1.0" ?>
 <robot name="max" xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
-  <xacro:property name="body_color" value="Gazebo/Silver" />
-  <gazebo>
-    <plugin name="control" filename="libgazebo_ros_control.so"/>
-  </gazebo>
-  <gazebo reference="base_link">
-    <material>${body_color}</material>
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <self_collide>true</self_collide>
-    <gravity>true</gravity>
-  </gazebo>
-
+  <xacro:property name="wheel_color" value="Gazebo/Black" />
+  <xacro:property name="lidar_color" value="Gazebo/Blue" />
+  
   <gazebo reference="fl_wheel_link">
-    <material>${body_color}</material>
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <self_collide>true</self_collide>
+    <material>${wheel_color}</material>
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <kp>100000.0</kp>
+    <kd>5.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>0.2</maxVel>
+    <fdir1>1 0 0</fdir1>
   </gazebo>
 
   <gazebo reference="fr_wheel_link">
-    <material>${body_color}</material>
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <self_collide>true</self_collide>
+    <material>${wheel_color}</material>
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <kp>100000.0</kp>
+    <kd>5.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>0.2</maxVel>
+    <fdir1>1 0 0</fdir1>
   </gazebo>
 
   <gazebo reference="rl_wheel_link">
-    <material>${body_color}</material>
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <self_collide>true</self_collide>
+    <material>${wheel_color}</material>
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <kp>100000.0</kp>
+    <kd>5.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>0.2</maxVel>
+    <fdir1>1 0 0</fdir1>
   </gazebo>
 
   <gazebo reference="rr_wheel_link">
-    <material>${body_color}</material>
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <self_collide>true</self_collide>
+    <material>${wheel_color}</material>
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <kp>100000.0</kp>
+    <kd>5.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>0.2</maxVel>
+    <fdir1>1 0 0</fdir1>
   </gazebo>
 
   <gazebo reference="lidar_link">
-    <material>${body_color}</material>
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-    <self_collide>true</self_collide>
+    <material>${lidar_color}</material>
   </gazebo>
+
 </robot>
