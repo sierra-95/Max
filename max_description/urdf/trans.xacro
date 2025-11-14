@@ -5,7 +5,7 @@
     <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
       <robot_param>robot_description</robot_param>
       <robot_param_node>/robot_state_publisher</robot_param_node>
-      <parameters>$(find bumperbot_controller)/config/bumperbot_controllers.yaml</parameters>
+      <parameters>$(find max_controller)/config/max_controller.yaml</parameters>
     </plugin>
   </gazebo>
   <transmission name="fl_transmission">
