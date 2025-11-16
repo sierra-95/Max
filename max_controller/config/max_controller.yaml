@@ -28,7 +28,7 @@ max_controller:
     left_wheel_names: ["fl_joint", "rl_joint"]
     right_wheel_names: ["fr_joint", "rr_joint"]
     
-    publish_rate: 50
+    publish_rate: 50.0
     pose_covariance_diagonal : [0.001, 0.001, 1.0e-3, 1.0e-3, 1.0e-3, 0.01]
     twist_covariance_diagonal: [0.001, 0.001, 1.0e-3, 1.0e-3, 1.0e-3, 0.01]
     
