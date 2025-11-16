@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import Float32MultiArray
+from std_msgs.msg import Float64MultiArray
 from geometry_msgs.msg import TwistStamped
 import numpy as np
 
@@ -18,7 +18,7 @@ class SimpleController(Node):
 
         self.get_logger().info(f"Wheel Radius: {self.wheel_radius}, Wheel Separation: {self.wheel_separation}")
 
-        self.wheel_cmd_pub_ = self.create_publisher(Float32MultiArray, 'simple_velocity_controller/commands', 10)
+        self.wheel_cmd_pub_ = self.create_publisher(Float64MultiArray, 'simple_velocity_controller/commands', 10)
         self.vel_sub_ = self.create_subscription(TwistStamped, 'max_controller/cmd_vel', self.velCallback, 10)
 
         self.speed_conversion = np.array([[self.wheel_radius/2, self.wheel_radius/2],
@@ -31,7 +31,7 @@ class SimpleController(Node):
                                 [msg.twist.angular.z]])
         
         wheel_speed = np.matmul(np.linalg.inv(self.speed_conversion), robot_speed)
-        wheel_speed_msg = Float32MultiArray()
+        wheel_speed_msg = Float64MultiArray()
         wheel_speed_msg.data = [wheel_speed[0,0],  # FL  ## 0,0 Left wheel velocity, 0,1 Right wheel velocity
                                 wheel_speed[1,0],  # FR
                                 wheel_speed[0,0],  # RL
