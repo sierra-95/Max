@@ -38,14 +38,6 @@ def generate_launch_description():
         )
     )
 
-    rviz2 = IncludeLaunchDescription(
-        os.path.join(
-            get_package_share_directory('max_description'),
-            'launch',
-            'display.launch.py'
-        )
-    )
-
     plotjuggler_node = Node(
         package="plotjuggler",
         executable="plotjuggler",
@@ -59,5 +51,4 @@ def generate_launch_description():
         controller,
         joystick,
         plotjuggler_node,
-        rviz2
     ])
