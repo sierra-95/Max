@@ -1,0 +1,10 @@
+<library path="max_firmware">
+    <class name="max_firmware/maxInterface"
+        type="max_firmware::maxInterface"
+        base_class_type="hardware_interface::SystemInterface"
+    >
+        <description>
+            max Hardware Interface
+        </description>
+    </class>
+</library>
