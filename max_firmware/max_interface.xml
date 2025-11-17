@@ -1,6 +1,6 @@
 <library path="max_firmware">
-    <class name="max_firmware/maxInterface"
-        type="max_firmware::maxInterface"
+    <class name="max_firmware/MaxInterface"
+        type="max_firmware::MaxInterface"
         base_class_type="hardware_interface::SystemInterface"
     >
         <description>

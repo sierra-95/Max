@@ -30,7 +30,10 @@ def generate_launch_description():
 
     robot_description = ParameterValue(
         Command([
-            "xacro ", LaunchConfiguration('model'),
+            "xacro", 
+            " ",
+            LaunchConfiguration('model'),
+            " ",
             "is_sim:=", LaunchConfiguration('is_sim')
         ]), 
         value_type=str
