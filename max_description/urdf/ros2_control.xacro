@@ -3,9 +3,18 @@
 <robot name="max" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     <ros2_control type="system" name="MaxSystem">
-        <hardware>
-            <plugin>gazebo_ros2_control/GazeboSystem</plugin>
-        </hardware>
+        <xacro:if value="$(arg is_sim)">
+            <hardware>
+                <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+            </hardware>
+        </xacro:if>
+
+        <xacro:unless value="$(arg is_sim)">
+            <hardware>
+                <plugin>max_firmware/MaxInterface</plugin>
+                <param name="port">/dev/ttyUSB0</param>
+            </hardware>
+        </xacro:unless>
 
         <joint name="fl_joint">
             <command_interface name="velocity">
