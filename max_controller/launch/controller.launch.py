@@ -26,17 +26,10 @@ def generate_launch_description():
         default_value="True",
     )
 
-    use_plotjuggler_arg = DeclareLaunchArgument(
-        "use_plotjuggler",
-        default_value="True",
-        description="Launch PlotJuggler GUI"
-    )
-
     use_python = LaunchConfiguration("use_python")
     wheel_radius = LaunchConfiguration("wheel_radius")
     wheel_separation = LaunchConfiguration("wheel_separation")
     use_simple_controller = LaunchConfiguration("use_simple_controller")
-    use_plotjuggler = LaunchConfiguration("use_plotjuggler")
 
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
@@ -46,14 +39,6 @@ def generate_launch_description():
             "--controller-manager",
             "/controller_manager",
         ],
-    )
-
-    plotjuggler_node = Node(
-        package="plotjuggler",
-        executable="plotjuggler",
-        name="plotjuggler",
-        output="screen",
-        condition=IfCondition(use_plotjuggler)
     )
 
     wheel_controller_spawner = Node(
@@ -108,10 +93,8 @@ def generate_launch_description():
             wheel_radius_arg,
             wheel_separation_arg,
             use_simple_controller_arg,
-            use_plotjuggler_arg,
             simple_controller,
             wheel_controller_spawner,
             joint_state_broadcaster_spawner,
-            plotjuggler_node,
         ]
     )

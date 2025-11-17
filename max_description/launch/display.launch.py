@@ -8,18 +8,6 @@ import os
 
 def generate_launch_description():
 
-    model_arg = DeclareLaunchArgument(
-        name='model',
-        default_value=os.path.join(
-            get_package_share_directory('max_description'),
-            'urdf',
-            'max.urdf.xacro'
-        ),
-        description='Absolute path to robot urdf file'
-    )
-
-    robot_description = ParameterValue(Command(["xacro ", LaunchConfiguration('model')]), value_type=str)
-
     joint_state_publisher_gui = Node(
         package='joint_state_publisher_gui',
         executable='joint_state_publisher_gui',
@@ -38,16 +26,8 @@ def generate_launch_description():
             'display.rviz'
         )],
     )
-
-    robot_state_publisher_node = Node(
-        package='robot_state_publisher',
-        executable='robot_state_publisher',
-        parameters=[{"robot_description": robot_description}],
-        output='screen'
-    )
+    
     return LaunchDescription([
-        model_arg,
         joint_state_publisher_gui,
         rviz_node,
-        robot_state_publisher_node
     ])

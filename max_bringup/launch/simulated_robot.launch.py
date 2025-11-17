@@ -13,28 +13,16 @@ def generate_launch_description():
             'gazebo.launch.py'
         )
     )
-    controller = IncludeLaunchDescription(
-        os.path.join(
-            get_package_share_directory('max_controller'),
-            'launch',
-            'controller.launch.py'
-        ),
-        launch_arguments={
-            "use_simple_controller": "False",
-            "use_python" : "False"
-        }.items()
-    )
 
-    joystick = IncludeLaunchDescription(
+    universal = IncludeLaunchDescription(
         os.path.join(
-            get_package_share_directory('max_controller'),
+            get_package_share_directory('max_universal'),
             'launch',
-            'joystick_teleop.launch.py'
+            'universal.launch.py'
         )
     )
 
     return LaunchDescription([
         gazebo,
-        controller,
-        joystick
+        universal
     ])
