@@ -46,9 +46,18 @@ def generate_launch_description():
         condition=IfCondition(use_plotjuggler)
     )
 
+    rviz2 = IncludeLaunchDescription(
+        os.path.join(
+            get_package_share_directory('max_description'),
+            'launch',
+            'display.launch.py'
+        )
+    )
+
     return LaunchDescription([
         use_plotjuggler_arg,
         controller,
         joystick,
         plotjuggler_node,
+        rviz2
     ])
