@@ -18,10 +18,10 @@
 
 
 // Wheel Encoders Connection PINs
+#define left_encoder_phaseA 19   // RL
+#define left_encoder_phaseB 18   // RL
 #define right_encoder_phaseA 20  // RR
 #define right_encoder_phaseB 21  // RR
-#define left_encoder_phaseA 18   // RL
-#define left_encoder_phaseB 19   // RL
 
 
 // Encoders
