@@ -38,7 +38,7 @@
             <inertia ixx="8.7e-05" iyy="0.000148" izz="8.7e-05" ixy="0.0" iyz="0.0" ixz="0.0"/>
         </inertial>
         <visual>
-            <origin xyz="-0.07309 -0.109 -0.0425" rpy="0 0 0"/>
+            <origin xyz="-0.35369 -0.109 -0.0425" rpy="0 0 0"/>
             <geometry>
                 <mesh filename="file://$(find max_description)/meshes/fl_wheel_link.stl" scale="0.001 0.001 0.001"/>
             </geometry>
@@ -59,7 +59,7 @@
             <inertia ixx="8.7e-05" iyy="0.000148" izz="8.7e-05" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
         </inertial>
         <visual>
-            <origin xyz="-0.07309 0.109 -0.0425" rpy="0 0 0"/>
+            <origin xyz="-0.35369 0.109 -0.0425" rpy="0 0 0"/>
             <geometry>
             <mesh filename="file://$(find max_description)/meshes/fr_wheel_link.stl" scale="0.001 0.001 0.001"/>
             </geometry>
@@ -80,7 +80,7 @@
             <inertia ixx="8.7e-05" iyy="0.000148" izz="8.7e-05" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
         </inertial>
         <visual>
-            <origin xyz="0.0978 -0.109 -0.0425" rpy="0 0 0"/>
+            <origin xyz="-0.1828 -0.109 -0.0425" rpy="0 0 0"/>
             <geometry>
             <mesh filename="file://$(find max_description)/meshes/rl_wheel_link.stl" scale="0.001 0.001 0.001"/>
             </geometry>
@@ -101,7 +101,7 @@
             <inertia ixx="8.7e-05" iyy="0.000148" izz="8.7e-05" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
         </inertial>
         <visual>
-            <origin xyz="0.0978 0.109 -0.0425" rpy="0 0 0"/>
+            <origin xyz="-0.1828 0.109 -0.0425" rpy="0 0 0"/>
             <geometry>
             <mesh filename="file://$(find max_description)/meshes/rr_wheel_link.stl" scale="0.001 0.001 0.001"/>
             </geometry>
