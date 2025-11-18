@@ -33,9 +33,9 @@
 
     <link name="fl_wheel_link">
         <inertial>
-            <origin xyz="4.163336342344337e-17 0.010504645034502769 0.0" rpy="0 0 0"/>
-            <mass value="0.16353745126830063"/>
-            <inertia ixx="8.7e-05" iyy="0.000148" izz="8.7e-05" ixy="0.0" iyz="0.0" ixz="0.0"/>
+            <origin xyz="5.551115123125783e-17 -0.010504987657416545 0.0" rpy="0 0 0"/>
+            <mass value="0.15230338417321157"/>
+            <inertia ixx="8.3e-05" iyy="0.000141" izz="8.3e-05" ixy="0.0" iyz="0.0" ixz="0.0"/>
         </inertial>
         <visual>
             <origin xyz="-0.35369 -0.109 -0.0425" rpy="0 0 0"/>
@@ -45,7 +45,7 @@
             <material name="matte_black"/>
         </visual>
         <collision>
-            <origin xyz="-0.07309 -0.109 -0.0425" rpy="0 0 0"/>
+            <origin xyz="-0.35369 -0.109 -0.0425" rpy="0 0 0"/>
             <geometry>
             <mesh filename="file://$(find max_description)/meshes/fl_wheel_link.stl" scale="0.001 0.001 0.001"/>
             </geometry>
@@ -54,9 +54,9 @@
 
     <link name="fr_wheel_link">
         <inertial>
-            <origin xyz="4.163336342344337e-17 -0.01050464503450281 -1.3877787807814457e-17" rpy="0 0 0"/>
-            <mass value="0.16353745126830063"/>
-            <inertia ixx="8.7e-05" iyy="0.000148" izz="8.7e-05" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
+            <origin xyz="5.551115123125783e-17 0.010504987657416559 0.0" rpy="0 0 0"/>
+            <mass value="0.15230338417321157"/>
+            <inertia ixx="8.3e-05" iyy="0.000141" izz="8.3e-05" ixy="-0.0" iyz="0.0" ixz="0.0"/>
         </inertial>
         <visual>
             <origin xyz="-0.35369 0.109 -0.0425" rpy="0 0 0"/>
@@ -66,7 +66,7 @@
             <material name="matte_black"/>
         </visual>
         <collision>
-            <origin xyz="-0.07309 0.109 -0.0425" rpy="0 0 0"/>
+            <origin xyz="-0.35369 0.109 -0.0425" rpy="0 0 0"/>
             <geometry>
             <mesh filename="file://$(find max_description)/meshes/fr_wheel_link.stl" scale="0.001 0.001 0.001"/>
             </geometry>
@@ -75,9 +75,9 @@
 
     <link name="rl_wheel_link">
         <inertial>
-            <origin xyz="5.551115123125783e-17 0.010504645034502769 -1.3877787807814457e-17" rpy="0 0 0"/>
-            <mass value="0.16353745126830063"/>
-            <inertia ixx="8.7e-05" iyy="0.000148" izz="8.7e-05" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+            <origin xyz="1.3877787807814457e-16 0.010504987657416587 0.0" rpy="0 0 0"/>
+            <mass value="0.15230338417321163"/>
+            <inertia ixx="8.3e-05" iyy="0.000141" izz="8.3e-05" ixy="0.0" iyz="0.0" ixz="0.0"/>
         </inertial>
         <visual>
             <origin xyz="-0.1828 -0.109 -0.0425" rpy="0 0 0"/>
@@ -87,7 +87,7 @@
             <material name="matte_black"/>
         </visual>
         <collision>
-            <origin xyz="0.0978 -0.109 -0.0425" rpy="0 0 0"/>
+            <origin xyz="-0.1828 -0.109 -0.0425" rpy="0 0 0"/>
             <geometry>
             <mesh filename="file://$(find max_description)/meshes/rl_wheel_link.stl" scale="0.001 0.001 0.001"/>
             </geometry>
@@ -96,9 +96,9 @@
 
     <link name="rr_wheel_link">
         <inertial>
-            <origin xyz="5.551115123125783e-17 -0.01050464503450281 -1.3877787807814457e-17" rpy="0 0 0"/>
-            <mass value="0.16353745126830063"/>
-            <inertia ixx="8.7e-05" iyy="0.000148" izz="8.7e-05" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+            <origin xyz="8.326672684688674e-17 -0.010504987657416587 0.0" rpy="0 0 0"/>
+            <mass value="0.15230338417321165"/>
+            <inertia ixx="8.3e-05" iyy="0.000141" izz="8.3e-05" ixy="0.0" iyz="-0.0" ixz="0.0"/>
         </inertial>
         <visual>
             <origin xyz="-0.1828 0.109 -0.0425" rpy="0 0 0"/>
@@ -108,7 +108,7 @@
             <material name="matte_black"/>
         </visual>
         <collision>
-            <origin xyz="0.0978 0.109 -0.0425" rpy="0 0 0"/>
+            <origin xyz="-0.1828 0.109 -0.0425" rpy="0 0 0"/>
             <geometry>
             <mesh filename="file://$(find max_description)/meshes/rr_wheel_link.stl" scale="0.001 0.001 0.001"/>
             </geometry>
