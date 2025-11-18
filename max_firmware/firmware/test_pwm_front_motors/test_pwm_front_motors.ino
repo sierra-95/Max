@@ -1,37 +1,17 @@
-// ----- Pin Definitions -----
-#define ENA 5   // Front Left Enable (PWM)
-#define ENB 6   // Front Right Enable (PWM)
-#define IN1 22  // FL IN1
-#define IN2 23  // FL IN2
-#define IN3 24  // FR IN3
-#define IN4 25  // FR IN4
-
-// Rear motors (wired but not used)
-#define ENA_R 7
-#define ENB_R 8
-#define IN1_R 26
-#define IN2_R 27
-#define IN3_R 28
-#define IN4_R 29
+#define ENA 5 
+#define ENB 6  
+#define IN1 22 
+#define IN2 23 
+#define IN3 24  
+#define IN4 25  
 
 void setup() {
-  // Front motor pins
   pinMode(ENA, OUTPUT);
   pinMode(ENB, OUTPUT);
   pinMode(IN1, OUTPUT);
   pinMode(IN2, OUTPUT);
   pinMode(IN3, OUTPUT);
   pinMode(IN4, OUTPUT);
-
-  // Rear motor pins (unused for now)
-  pinMode(ENA_R, OUTPUT);
-  pinMode(ENB_R, OUTPUT);
-  pinMode(IN1_R, OUTPUT);
-  pinMode(IN2_R, OUTPUT);
-  pinMode(IN3_R, OUTPUT);
-  pinMode(IN4_R, OUTPUT);
-
-  // Ensure all motors are stopped initially
   stopMotors();
 }
 
@@ -42,7 +22,7 @@ void loop() {
   digitalWrite(IN3, HIGH);
   digitalWrite(IN4, LOW);
 
-  analogWrite(ENA, 200); // PWM speed (0-255)
+  analogWrite(ENA, 200);
   analogWrite(ENB, 200);
 
   delay(5000);  // run 5 seconds
