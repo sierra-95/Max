@@ -1,35 +1,24 @@
 // ------------------- Encoder pins -------------------
-#define ENCA_FL 18
-#define ENCB_FL 19
+#define ENCA_RL 18
+#define ENCB_RL 19
 
-#define ENCA_FR 20
-#define ENCB_FR 21
-
-#define ENCA_RR 2
-#define ENCB_RR 3
+#define ENCA_RR 20
+#define ENCB_RR 21
 
 // ------------------- Counters -------------------
-volatile long countFL = 0;
-volatile long countFR = 0;
+volatile long countRL = 0;
 volatile long countRR = 0;
 
 void setup() {
-  pinMode(ENCA_FL, INPUT);
-  pinMode(ENCB_FL, INPUT);
-
-  pinMode(ENCA_FR, INPUT);
-  pinMode(ENCB_FR, INPUT);
+  pinMode(ENCA_RL, INPUT);
+  pinMode(ENCB_RL, INPUT);
 
   pinMode(ENCA_RR, INPUT);
   pinMode(ENCB_RR, INPUT);
 
-  // Attach interrupts for FL
-  attachInterrupt(digitalPinToInterrupt(ENCA_FL), readEncoderFL_A, CHANGE);
-  attachInterrupt(digitalPinToInterrupt(ENCB_FL), readEncoderFL_B, CHANGE);
-
-  // Attach interrupts for FR
-  attachInterrupt(digitalPinToInterrupt(ENCA_FR), readEncoderFR_A, CHANGE);
-  attachInterrupt(digitalPinToInterrupt(ENCB_FR), readEncoderFR_B, CHANGE);
+  // Attach interrupts for RL
+  attachInterrupt(digitalPinToInterrupt(ENCA_RL), readEncoderRL_A, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(ENCB_RL), readEncoderRL_B, CHANGE);
 
   // Attach interrupts for RR
   attachInterrupt(digitalPinToInterrupt(ENCA_RR), readEncoderRR_A, CHANGE);
@@ -39,61 +28,54 @@ void setup() {
 }
 
 void loop() {
-  static long lastCountFL = 0;
-  static long lastCountFR = 0;
+  static long lastCountRL = 0;
   static long lastCountRR = 0;
   static unsigned long lastTime = 0;
 
   if (millis() - lastTime >= 200) {  // update every 200 ms
     unsigned long now = millis();
 
-    long deltaFL = countFL - lastCountFL;
-    long deltaFR = countFR - lastCountFR;
+    long deltaRL = countRL - lastCountRL;
     long deltaRR = countRR - lastCountRR;
 
-    String dirFL = (deltaFL > 0) ? "Forward" : (deltaFL < 0) ? "Reverse" : "Stopped";
-    String dirFR = (deltaFR > 0) ? "Forward" : (deltaFR < 0) ? "Reverse" : "Stopped";
+    String dirRL = (deltaRL > 0) ? "Forward" : (deltaRL < 0) ? "Reverse" : "Stopped";
     String dirRR = (deltaRR > 0) ? "Forward" : (deltaRR < 0) ? "Reverse" : "Stopped";
 
-    Serial.print("FL: "); Serial.print(countFL); Serial.print(" (Δ"); Serial.print(deltaFL); Serial.print(", "); Serial.print(dirFL); Serial.print(") | ");
-    Serial.print("FR: "); Serial.print(countFR); Serial.print(" (Δ"); Serial.print(deltaFR); Serial.print(", "); Serial.print(dirFR); Serial.print(") | ");
-    Serial.print("RR: "); Serial.print(countRR); Serial.print(" (Δ"); Serial.print(deltaRR); Serial.print(", "); Serial.print(dirRR); Serial.println(")");
+    Serial.print("RL: "); 
+    Serial.print(countRL); 
+    Serial.print(" (Δ"); 
+    Serial.print(deltaRL); 
+    Serial.print(", "); 
+    Serial.print(dirRL); 
+    Serial.print(") | ");
 
-    lastCountFL = countFL;
-    lastCountFR = countFR;
+    Serial.print("RR: "); 
+    Serial.print(countRR); 
+    Serial.print(" (Δ"); 
+    Serial.print(deltaRR); 
+    Serial.print(", "); 
+    Serial.print(dirRR); 
+    Serial.println(")");
+
+    lastCountRL = countRL;
     lastCountRR = countRR;
     lastTime = now;
   }
 }
 
-// ------------------- FL Encoder ISRs -------------------
-void readEncoderFL_A() {
-  int a = digitalRead(ENCA_FL);
-  int b = digitalRead(ENCB_FL);
-  if (a == b) countFL++;
-  else countFL--;
+// ------------------- RL Encoder ISRs -------------------
+void readEncoderRL_A() {
+  int a = digitalRead(ENCA_RL);
+  int b = digitalRead(ENCB_RL);
+  if (a == b) countRL++;
+  else countRL--;
 }
 
-void readEncoderFL_B() {
-  int a = digitalRead(ENCA_FL);
-  int b = digitalRead(ENCB_FL);
-  if (a != b) countFL++;
-  else countFL--;
-}
-
-// ------------------- FR Encoder ISRs -------------------
-void readEncoderFR_A() {
-  int a = digitalRead(ENCA_FR);
-  int b = digitalRead(ENCB_FR);
-  if (a == b) countFR++;
-  else countFR--;
-}
-
-void readEncoderFR_B() {
-  int a = digitalRead(ENCA_FR);
-  int b = digitalRead(ENCB_FR);
-  if (a != b) countFR++;
-  else countFR--;
+void readEncoderRL_B() {
+  int a = digitalRead(ENCA_RL);
+  int b = digitalRead(ENCB_RL);
+  if (a != b) countRL++;
+  else countRL--;
 }
 
 // ------------------- RR Encoder ISRs -------------------
