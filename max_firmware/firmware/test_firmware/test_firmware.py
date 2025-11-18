@@ -56,7 +56,6 @@ def main():
     running = False
     thread.join(timeout=1)
     ser.close()
-    print("Done & closed.")
 
 
 if __name__ == "__main__":
