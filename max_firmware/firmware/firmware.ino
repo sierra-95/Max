@@ -1,18 +1,28 @@
 #include <PID_v1.h>
 
-// L298N H-Bridge Connection PINs
-#define L298N_enA 9  // PWM
-#define L298N_enB 11  // PWM
-#define L298N_in4 8  // Dir Motor B
-#define L298N_in3 7  // Dir Motor B
-#define L298N_in2 13  // Dir Motor A
-#define L298N_in1 12  // Dir Motor A
+// Rear Wheels
+#define L298N_enA 7   
+#define L298N_enB 8   
+#define L298N_in1 26  
+#define L298N_in2 27  
+#define L298N_in3 28  
+#define L298N_in4 29
+
+// Front Wheels (Driver 1)
+#define L298N_enA_F 5
+#define L298N_enB_F 6
+#define L298N_in1_F 22
+#define L298N_in2_F 23
+#define L298N_in3_F 24
+#define L298N_in4_F 25
+
 
 // Wheel Encoders Connection PINs
-#define right_encoder_phaseA 3  // Interrupt 
-#define right_encoder_phaseB 5  
-#define left_encoder_phaseA 2   // Interrupt
-#define left_encoder_phaseB 4
+#define right_encoder_phaseA 20  // RR
+#define right_encoder_phaseB 21  // RR
+#define left_encoder_phaseA 18   // RL
+#define left_encoder_phaseB 19   // RL
+
 
 // Encoders
 unsigned int right_encoder_counter = 0;
@@ -195,6 +205,14 @@ void loop() {
 
     analogWrite(L298N_enA, right_wheel_cmd);
     analogWrite(L298N_enB, left_wheel_cmd);
+
+    //Slave rear wheels    
+    analogWrite(L298N_enA_F, left_wheel_cmd);
+    analogWrite(L298N_enB_F, right_wheel_cmd);
+    digitalWrite(L298N_in1_F, digitalRead(L298N_in1));
+    digitalWrite(L298N_in2_F, digitalRead(L298N_in2));
+    digitalWrite(L298N_in3_F, digitalRead(L298N_in3));
+    digitalWrite(L298N_in4_F, digitalRead(L298N_in4));
   }
 }
 
