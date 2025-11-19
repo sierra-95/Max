@@ -99,6 +99,10 @@ CallbackReturn MaxInterface::on_activate(const rclcpp_lifecycle::State &)
   {
     arduino_.Open(port_);
     arduino_.SetBaudRate(LibSerial::BaudRate::BAUD_115200);
+    RCLCPP_INFO(rclcpp::get_logger("MaxInterface"),
+              "Serial IsOpen=%s, IsDataAvailable=%s",
+              arduino_.IsOpen() ? "true" : "false",
+              arduino_.IsDataAvailable() ? "true" : "false");
   }
   catch (...)
   {
