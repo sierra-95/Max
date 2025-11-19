@@ -91,8 +91,8 @@ CallbackReturn MaxInterface::on_activate(const rclcpp_lifecycle::State &)
     RCLCPP_INFO(rclcpp::get_logger("MaxInterface"), "Starting robot hardware ...");
 
     velocity_commands_ = {0.0, 0.0};
-    position_states_ = {0.0, 0.0};
-    velocity_states_ = {0.0, 0.0};
+    position_states_ = {0.0, 0.0, 0.0, 0.0};
+    velocity_states_ = {0.0, 0.0, 0.0, 0.0};
 
     try
     {
@@ -195,11 +195,18 @@ hardware_interface::return_type MaxInterface::read(const rclcpp::Time &,
       {
         velocity_states_.at(0) = multiplier * std::stod(res.substr(2, res.size()));
         position_states_.at(0) += velocity_states_.at(0) * dt;
+
+
+        velocity_states_.at(2) = velocity_states_.at(0);
+        position_states_.at(2) += velocity_states_.at(2) * dt;
       }
       else if(res.at(0) == 'l')
       {
         velocity_states_.at(1) = multiplier * std::stod(res.substr(2, res.size()));
         position_states_.at(1) += velocity_states_.at(1) * dt;
+
+        velocity_states_.at(3) = velocity_states_.at(1);
+        position_states_.at(3) += velocity_states_.at(3) * dt;
       }
     }
     last_run_ = rclcpp::Clock().now();
