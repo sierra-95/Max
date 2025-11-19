@@ -88,33 +88,74 @@ std::vector<hardware_interface::CommandInterface> MaxInterface::export_command_i
 
 CallbackReturn MaxInterface::on_activate(const rclcpp_lifecycle::State &)
 {
-  RCLCPP_INFO(rclcpp::get_logger("MaxInterface"), "Starting robot hardware ...");
+    RCLCPP_INFO(rclcpp::get_logger("MaxInterface"), "Starting robot hardware ...");
 
-  // Reset commands and states
-  velocity_commands_ = { 0.0, 0.0 };
-  position_states_ = { 0.0, 0.0 };
-  velocity_states_ = { 0.0, 0.0 };
+    // Reset commands and states
+    velocity_commands_ = {0.0, 0.0};
+    position_states_ = {0.0, 0.0};
+    velocity_states_ = {0.0, 0.0};
 
-  try
-  {
-    arduino_.Open(port_);
-    arduino_.SetBaudRate(LibSerial::BaudRate::BAUD_115200);
+    try
+    {
+        arduino_.Open(port_);
+        arduino_.SetBaudRate(LibSerial::BaudRate::BAUD_115200);
+
+        // Clear any old data
+        while (arduino_.IsDataAvailable())
+        {
+            std::string dummy;
+            arduino_.ReadLine(dummy);
+        }
+
+        // Send a simple "ping" command
+        const std::string ping_cmd = "p0.00,l0.00,";
+        arduino_.Write(ping_cmd);
+
+        // Wait for handshake with timeout
+        const auto timeout = std::chrono::seconds(5);
+        auto start_time = std::chrono::steady_clock::now();
+        bool handshake_ok = false;
+        while (std::chrono::steady_clock::now() - start_time < timeout)
+        {
+            if (arduino_.IsDataAvailable())
+            {
+                std::string response;
+                arduino_.ReadLine(response);
+
+                // check if response looks valid
+                if (response.find("rp") != std::string::npos ||
+                    response.find("rn") != std::string::npos)
+                {
+                    handshake_ok = true;
+                    break;
+                }
+            }
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        }
+
+        if (!handshake_ok)
+        {
+            RCLCPP_FATAL(rclcpp::get_logger("MaxInterface"), 
+                         "Handshake with Arduino failed: no valid response within timeout");
+            return CallbackReturn::FAILURE;
+        }
+
+        RCLCPP_INFO(rclcpp::get_logger("MaxInterface"),
+                    "Serial IsOpen=%s, Handshake successful",
+                    arduino_.IsOpen() ? "true" : "false");
+    }
+    catch (...)
+    {
+        RCLCPP_FATAL_STREAM(rclcpp::get_logger("MaxInterface"),
+                            "Something went wrong while interacting with port " << port_);
+        return CallbackReturn::FAILURE;
+    }
+
     RCLCPP_INFO(rclcpp::get_logger("MaxInterface"),
-              "Serial IsOpen=%s, IsDataAvailable=%s",
-              arduino_.IsOpen() ? "true" : "false",
-              arduino_.IsDataAvailable() ? "true" : "false");
-  }
-  catch (...)
-  {
-    RCLCPP_FATAL_STREAM(rclcpp::get_logger("MaxInterface"),
-                        "Something went wrong while interacting with port " << port_);
-    return CallbackReturn::FAILURE;
-  }
-
-  RCLCPP_INFO(rclcpp::get_logger("MaxInterface"),
-              "Hardware started, ready to take commands");
-  return CallbackReturn::SUCCESS;
+                "Hardware started, ready to take commands");
+    return CallbackReturn::SUCCESS;
 }
+
 
 
 CallbackReturn MaxInterface::on_deactivate(const rclcpp_lifecycle::State &)
