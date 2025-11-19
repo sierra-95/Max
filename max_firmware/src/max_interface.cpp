@@ -90,7 +90,6 @@ CallbackReturn MaxInterface::on_activate(const rclcpp_lifecycle::State &)
 {
     RCLCPP_INFO(rclcpp::get_logger("MaxInterface"), "Starting robot hardware ...");
 
-    // Reset commands and states
     velocity_commands_ = {0.0, 0.0};
     position_states_ = {0.0, 0.0};
     velocity_states_ = {0.0, 0.0};
@@ -100,18 +99,15 @@ CallbackReturn MaxInterface::on_activate(const rclcpp_lifecycle::State &)
         arduino_.Open(port_);
         arduino_.SetBaudRate(LibSerial::BaudRate::BAUD_115200);
 
-        // Clear any old data
         while (arduino_.IsDataAvailable())
         {
             std::string dummy;
             arduino_.ReadLine(dummy);
         }
 
-        // Send a simple "ping" command
         const std::string ping_cmd = "p0.00,l0.00,";
         arduino_.Write(ping_cmd);
 
-        // Wait for handshake with timeout
         const auto timeout = std::chrono::seconds(5);
         auto start_time = std::chrono::steady_clock::now();
         bool handshake_ok = false;
@@ -122,7 +118,6 @@ CallbackReturn MaxInterface::on_activate(const rclcpp_lifecycle::State &)
                 std::string response;
                 arduino_.ReadLine(response);
 
-                // check if response looks valid
                 if (response.find("rp") != std::string::npos ||
                     response.find("rn") != std::string::npos)
                 {
