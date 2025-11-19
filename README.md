@@ -1,13 +1,6 @@
-# Max – Autonomous Mobile Robot (AMR)
+# Project Max
 
 **Max** is a 4-wheeled Autonomous Mobile Robot (AMR) designed for mapping and autonomous navigation using ROS 2 Humble Hawksbill.
-
-## Features
-* **Navigation:** Differential drive controller with full autonomous navigation using **Nav2**.
-* **Mapping:**
-
-  * **2D Mapping:** SLAM Toolbox with RPLIDAR A1.
-  * **VSLAM:** RTAB-Map with Orbbec Astra Pro.
 
 ## Installation
 
