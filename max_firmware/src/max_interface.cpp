@@ -38,14 +38,6 @@ CallbackReturn MaxInterface::on_init(const hardware_interface::HardwareInfo &har
   try
   {
     port_ = info_.hardware_parameters.at("port");
-    RCLCPP_INFO(rclcpp::get_logger("MaxInterface"),
-            "on_init: port='%s', joint_count=%zu",
-            port_.c_str(), info_.joints.size());
-
-    RCLCPP_INFO(rclcpp::get_logger("MaxInterface"),
-                "on_init: reserved vectors sizes: cmd=%zu pos=%zu vel=%zu",
-                velocity_commands_.capacity(), position_states_.capacity(), velocity_states_.capacity());
-
   }
   catch (const std::out_of_range &e)
   {
@@ -103,13 +95,6 @@ CallbackReturn MaxInterface::on_activate(const rclcpp_lifecycle::State &)
   position_states_ = { 0.0, 0.0 };
   velocity_states_ = { 0.0, 0.0 };
 
-  RCLCPP_INFO(rclcpp::get_logger("MaxInterface"),
-            "on_activate: commands=[%f, %f], positions=[%f, %f], velocities=[%f, %f]",
-            velocity_commands_.at(0), velocity_commands_.at(1),
-            position_states_.at(0), position_states_.at(1),
-            velocity_states_.at(0), velocity_states_.at(1));
-
-
   try
   {
     arduino_.Open(port_);
@@ -159,7 +144,6 @@ hardware_interface::return_type MaxInterface::read(const rclcpp::Time &,
     auto dt = (rclcpp::Clock().now() - last_run_).seconds();
     std::string message;
     arduino_.ReadLine(message);
-    RCLCPP_DEBUG_STREAM(rclcpp::get_logger("MaxInterface"), "read: raw_line='" << message << "'");
     std::stringstream ss(message);
     std::string res;
     int multiplier = 1;
@@ -177,13 +161,6 @@ hardware_interface::return_type MaxInterface::read(const rclcpp::Time &,
         velocity_states_.at(1) = multiplier * std::stod(res.substr(2, res.size()));
         position_states_.at(1) += velocity_states_.at(1) * dt;
       }
-
-      RCLCPP_DEBUG(rclcpp::get_logger("MaxInterface"),
-             "read: parsed velocities right=%f left=%f positions right=%f left=%f dt=%f",
-             velocity_states_.at(0), velocity_states_.at(1),
-             position_states_.at(0), position_states_.at(1),
-             dt);
-
     }
     last_run_ = rclcpp::Clock().now();
   }
@@ -221,13 +198,6 @@ hardware_interface::return_type MaxInterface::write(const rclcpp::Time &,
     "r" << right_wheel_sign << compensate_zeros_right << std::abs(velocity_commands_.at(0)) << 
     ",l" <<  left_wheel_sign << compensate_zeros_left << std::abs(velocity_commands_.at(1)) << ",";
 
-  RCLCPP_DEBUG(rclcpp::get_logger("MaxInterface"),
-              "write(): velocity_commands right=%f left=%f",
-              velocity_commands_.at(0), velocity_commands_.at(1));
-    
-  std::string message_str = message_stream.str();
-  RCLCPP_DEBUG_STREAM(rclcpp::get_logger("MaxInterface"),
-                      "write(): serial_msg='" << message_str << "'");
   try
   {
     arduino_.Write(message_stream.str());
