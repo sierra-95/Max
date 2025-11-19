@@ -23,13 +23,13 @@ colcon build
 
 ## Running Max
 
-### Simulated Robot
+#### Simulated Robot
 
 ```bash
 ros2 launch max_bringup max.simulated.launch.py
 ```
 
-### Real Robot
+#### Real Robot
 
 ```bash
 ros2 launch max_bringup max.launch.py
