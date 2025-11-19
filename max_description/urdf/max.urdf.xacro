@@ -12,9 +12,9 @@
     
     <link name="base_link">
         <inertial>
-            <origin xyz="-0.008949251381261427 2.0808612371678153e-17 0.10071250738095076" rpy="0 0 0"/>
-            <mass value="8.307942395442693"/>
-            <inertia ixx="0.041631" iyy="0.061003" izz="0.073974" ixy="-0.0" iyz="-0.0" ixz="0.002477"/>
+            <origin xyz="0.004914987095310725 0.0 0.11525864563546669" rpy="0 0 0"/>
+            <mass value="2.1411582458682883"/>
+            <inertia ixx="0.015376" iyy="0.021164" izz="0.024064" ixy="-0.0" iyz="-0.0" ixz="0.000293"/>
         </inertial>
         <visual>
             <origin xyz="0 0 -0.0425" rpy="0 0 0"/>
@@ -33,19 +33,19 @@
 
     <link name="fl_wheel_link">
         <inertial>
-            <origin xyz="5.551115123125783e-17 -0.010504987657416545 0.0" rpy="0 0 0"/>
+            <origin xyz="4.163336342344337e-17 0.010504987657416559 -1.3877787807814457e-17" rpy="0 0 0"/>
             <mass value="0.15230338417321157"/>
-            <inertia ixx="8.3e-05" iyy="0.000141" izz="8.3e-05" ixy="0.0" iyz="0.0" ixz="0.0"/>
+            <inertia ixx="8.3e-05" iyy="0.000141" izz="8.3e-05" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
         </inertial>
         <visual>
-            <origin xyz="-0.35369 -0.109 -0.0425" rpy="0 0 0"/>
+            <origin xyz="-0.07309 -0.109 -0.0425" rpy="0 0 0"/>
             <geometry>
                 <mesh filename="file://$(find max_description)/meshes/fl_wheel_link.stl" scale="0.001 0.001 0.001"/>
             </geometry>
             <material name="matte_black"/>
         </visual>
         <collision>
-            <origin xyz="-0.35369 -0.109 -0.0425" rpy="0 0 0"/>
+            <origin xyz="-0.07309 -0.109 -0.0425" rpy="0 0 0"/>
             <geometry>
             <mesh filename="file://$(find max_description)/meshes/fl_wheel_link.stl" scale="0.001 0.001 0.001"/>
             </geometry>
@@ -54,19 +54,19 @@
 
     <link name="fr_wheel_link">
         <inertial>
-            <origin xyz="5.551115123125783e-17 0.010504987657416559 0.0" rpy="0 0 0"/>
+            <origin xyz="4.163336342344337e-17 -0.010504987657416545 -1.3877787807814457e-17" rpy="0 0 0"/>
             <mass value="0.15230338417321157"/>
-            <inertia ixx="8.3e-05" iyy="0.000141" izz="8.3e-05" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+            <inertia ixx="8.3e-05" iyy="0.000141" izz="8.3e-05" ixy="0.0" iyz="0.0" ixz="-0.0"/>
         </inertial>
         <visual>
-            <origin xyz="-0.35369 0.109 -0.0425" rpy="0 0 0"/>
+            <origin xyz="-0.07309 0.109 -0.0425" rpy="0 0 0"/>
             <geometry>
             <mesh filename="file://$(find max_description)/meshes/fr_wheel_link.stl" scale="0.001 0.001 0.001"/>
             </geometry>
             <material name="matte_black"/>
         </visual>
         <collision>
-            <origin xyz="-0.35369 0.109 -0.0425" rpy="0 0 0"/>
+            <origin xyz="-0.07309 0.109 -0.0425" rpy="0 0 0"/>
             <geometry>
             <mesh filename="file://$(find max_description)/meshes/fr_wheel_link.stl" scale="0.001 0.001 0.001"/>
             </geometry>
@@ -75,19 +75,19 @@
 
     <link name="rl_wheel_link">
         <inertial>
-            <origin xyz="1.3877787807814457e-16 0.010504987657416587 0.0" rpy="0 0 0"/>
+            <origin xyz="6.938893903907228e-17 0.010504987657416559 0.0" rpy="0 0 0"/>
             <mass value="0.15230338417321163"/>
-            <inertia ixx="8.3e-05" iyy="0.000141" izz="8.3e-05" ixy="0.0" iyz="0.0" ixz="0.0"/>
+            <inertia ixx="8.3e-05" iyy="0.000141" izz="8.3e-05" ixy="0.0" iyz="-0.0" ixz="0.0"/>
         </inertial>
         <visual>
-            <origin xyz="-0.1828 -0.109 -0.0425" rpy="0 0 0"/>
+            <origin xyz="0.0978 -0.109 -0.0425" rpy="0 0 0"/>
             <geometry>
             <mesh filename="file://$(find max_description)/meshes/rl_wheel_link.stl" scale="0.001 0.001 0.001"/>
             </geometry>
             <material name="matte_black"/>
         </visual>
         <collision>
-            <origin xyz="-0.1828 -0.109 -0.0425" rpy="0 0 0"/>
+            <origin xyz="0.0978 -0.109 -0.0425" rpy="0 0 0"/>
             <geometry>
             <mesh filename="file://$(find max_description)/meshes/rl_wheel_link.stl" scale="0.001 0.001 0.001"/>
             </geometry>
@@ -96,19 +96,19 @@
 
     <link name="rr_wheel_link">
         <inertial>
-            <origin xyz="8.326672684688674e-17 -0.010504987657416587 0.0" rpy="0 0 0"/>
-            <mass value="0.15230338417321165"/>
-            <inertia ixx="8.3e-05" iyy="0.000141" izz="8.3e-05" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+            <origin xyz="6.938893903907228e-17 -0.010504987657416559 -2.0816681711721685e-17" rpy="0 0 0"/>
+            <mass value="0.15230338417321163"/>
+            <inertia ixx="8.3e-05" iyy="0.000141" izz="8.3e-05" ixy="-0.0" iyz="0.0" ixz="0.0"/>
         </inertial>
         <visual>
-            <origin xyz="-0.1828 0.109 -0.0425" rpy="0 0 0"/>
+            <origin xyz="0.0978 0.109 -0.0425" rpy="0 0 0"/>
             <geometry>
             <mesh filename="file://$(find max_description)/meshes/rr_wheel_link.stl" scale="0.001 0.001 0.001"/>
             </geometry>
             <material name="matte_black"/>
         </visual>
         <collision>
-            <origin xyz="-0.1828 0.109 -0.0425" rpy="0 0 0"/>
+            <origin xyz="0.0978 0.109 -0.0425" rpy="0 0 0"/>
             <geometry>
             <mesh filename="file://$(find max_description)/meshes/rr_wheel_link.stl" scale="0.001 0.001 0.001"/>
             </geometry>
@@ -117,9 +117,9 @@
 
     <link name="lidar_link">
         <inertial>
-            <origin xyz="1.9174124308283903e-17 6.391374769427968e-18 0.011555000000000093" rpy="0 0 0"/>
-            <mass value="0.11472963638620308"/>
-            <inertia ixx="4e-05" iyy="4e-05" izz="7e-05" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+            <origin xyz="1.9174124308283903e-17 6.391374769427968e-18 0.011555000000000065" rpy="0 0 0"/>
+            <mass value="0.09427396478246144"/>
+            <inertia ixx="3.3e-05" iyy="3.3e-05" izz="5.8e-05" ixy="0.0" iyz="0.0" ixz="-0.0"/>
         </inertial>
         <visual>
             <origin xyz="-0.0 -0.0 -0.204001" rpy="0 0 0"/>
@@ -139,8 +139,8 @@
     <link name="camera_link">
         <inertial>
             <origin xyz="0.014490312898766358 3.7392359944188856e-16 -0.008993541932510896" rpy="0 0 0"/>
-            <mass value="1.7184205751165316"/>
-            <inertia ixx="0.00474" iyy="0.000448" izz="0.004472" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+            <mass value="0.23204150441063995"/>
+            <inertia ixx="0.00064" iyy="6e-05" izz="0.000604" ixy="0.0" iyz="-0.0" ixz="0.0"/>
         </inertial>
         <visual>
             <origin xyz="-0.1133 -0.0 -0.144" rpy="0 0 0"/>
