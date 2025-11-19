@@ -21,7 +21,7 @@ colcon build
 . install/setup.bash
 ```
 
-## Running Max
+## Launching Max
 
 #### Simulated Robot
 
