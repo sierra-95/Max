@@ -18,7 +18,22 @@ def generate_launch_description():
         parameters=[os.path.join(get_package_share_directory('max_controller'), 'config', 'joy_teleop.yaml')]
     )
 
+    teleop_twist_joy = Node(
+        package='teleop_twist_joy',
+        executable='teleop_node',
+        name='teleop_twist_joy_node',
+        parameters=[
+            os.path.join(
+                get_package_share_directory('max_controller'),
+                'config',
+                'teleop_twist_joy.yaml'
+            )
+        ],
+        remappings=[('/cmd_vel', '/max_controller/cmd_vel')]
+    )
+
+
     return LaunchDescription([
         joy_node,
-        joy_teleop
+        teleop_twist_joy,
     ])
