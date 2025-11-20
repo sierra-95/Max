@@ -4,9 +4,17 @@
 
     <ros2_control type="system" name="MaxSystem">
         <xacro:if value="$(arg is_sim)">
-            <hardware>
-                <plugin>gazebo_ros2_control/GazeboSystem</plugin>
-            </hardware>
+            <xacro:if value="$(arg is_ignition)">
+                <hardware>
+                    <plugin>ign_ros2_control/IgnitionSystem</plugin>
+                </hardware>
+            </xacro:if>
+
+            <xacro:unless value="$(arg is_ignition)">
+                <hardware>
+                    <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+                </hardware>
+            </xacro:unless>
         </xacro:if>
 
         <xacro:unless value="$(arg is_sim)">

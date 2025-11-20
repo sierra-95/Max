@@ -2,12 +2,22 @@
 <robot name="max" xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
   <gazebo>
-    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-      <robot_param>robot_description</robot_param>
-      <robot_param_node>/robot_state_publisher</robot_param_node>
-      <parameters>$(find max_controller)/config/max_controller.yaml</parameters>
-    </plugin>
+    <xacro:if value="$(arg is_ignition)">
+      <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
+        <parameters>$(find max_controller)/config/max_controller.yaml</parameters>
+      </plugin>
+    </xacro:if>
+    
+    <xacro:unless value="$(arg is_ignition)">
+      <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+        <robot_param>robot_description</robot_param>
+        <robot_param_node>/robot_state_publisher</robot_param_node>
+        <parameters>$(find max_controller)/config/max_controller.yaml</parameters>
+      </plugin>
+    </xacro:unless>
+    
   </gazebo>
+  
   <transmission name="fl_transmission">
     <plugin>transmission_interface/SimpleTransmission</plugin>
     <joint name="fl_joint" role="joint_fl">

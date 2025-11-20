@@ -3,6 +3,8 @@
 <robot name="max" xmlns:xacro="http://www.ros.org/wiki/xacro">
     
     <xacro:arg name="is_sim" default="true"/>
+    <xacro:arg name="is_ignition" default="false"/>
+    
     <xacro:include filename="$(find max_description)/urdf/materials.xacro" />
     <xacro:include filename="$(find max_description)/urdf/max.gazebo.xacro" />
     <xacro:include filename="$(find max_description)/urdf/trans.xacro" />
