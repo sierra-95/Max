@@ -2,7 +2,7 @@
 
 **Max** is a 4-wheeled Autonomous Mobile Robot (AMR) designed for mapping and autonomous navigation using ROS 2 Humble Hawksbill.
 
-## Installation
+## Getting Started
 
 ```bash
 # Create workspace
@@ -14,13 +14,22 @@ git clone https://github.com/sierra-95/Max.git
 # Move source files
 mkdir src && mv Max src/
 
-# Build workspace
-colcon build
+```
+## Installation
 
-# Source setup
-. install/setup.bash
+```bash
+# Update Ros Database
+sudo rosdep update
+
+# Install dependancies
+rosdep install --from-paths src --ignore-src -r -y
 ```
 
+```bash
+# Build the  packages
+colcon build --symlink-install
+. install/setup.bash
+```
 ## Launching Max
 
 #### Simulated Robot
