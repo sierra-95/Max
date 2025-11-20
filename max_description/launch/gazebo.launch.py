@@ -8,6 +8,7 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.conditions import IfCondition, UnlessCondition
 import os
 from os import pathsep
+from pathlib import Path
 
 
 def generate_launch_description():
@@ -41,11 +42,17 @@ def generate_launch_description():
         ),
         description='Absolute path to robot urdf file'
     )
-    model_path = os.path.join(
+    ignition_model_path = str(Path(max_description).parent.resolve())
+    ignition_model_path += pathsep + os.path.join(
+        max_description,
+        'models'
+    )
+
+    classic_model_path = os.path.join(
         max_description,
         "models",
     )
-    model_path += pathsep + os.path.join(
+    classic_model_path += pathsep + os.path.join(
         max_description_prefix,
         "share",
     )
@@ -72,7 +79,7 @@ def generate_launch_description():
     is_ignition = GroupAction(
         condition = IfCondition(LaunchConfiguration("is_ignition")),
         actions = [
-                SetEnvironmentVariable("GZ_SIM_RESOURCE_PATH", model_path),
+                SetEnvironmentVariable("GZ_SIM_RESOURCE_PATH", ignition_model_path),
                 IncludeLaunchDescription(
                     PythonLaunchDescriptionSource([
                         os.path.join(
@@ -96,7 +103,7 @@ def generate_launch_description():
     is_classic = GroupAction(
         condition = UnlessCondition(LaunchConfiguration("is_ignition")),
         actions = [
-                    SetEnvironmentVariable("GAZEBO_MODEL_PATH", model_path),
+                    SetEnvironmentVariable("GAZEBO_MODEL_PATH", classic_model_path),
                     IncludeLaunchDescription(
                         PythonLaunchDescriptionSource(
                             os.path.join(
