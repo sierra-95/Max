@@ -1,51 +1,27 @@
 from launch import LaunchDescription
 from launch_ros.actions import Node
-from launch.actions import DeclareLaunchArgument
 from ament_index_python.packages import get_package_share_directory
-from launch_ros.parameter_descriptions import ParameterValue
-from launch.substitutions import Command, LaunchConfiguration
+from launch.substitutions import LaunchConfiguration
 import os
 
 def generate_launch_description():
 
+    use_sim_time = LaunchConfiguration("use_sim_time")
     max_description_dir = get_package_share_directory("max_description")
-
-    model_arg = DeclareLaunchArgument(name="model", default_value=os.path.join(
-                                        max_description_dir, "urdf", "max.urdf.xacro"
-                                        ),
-                                      description="Absolute path to robot urdf file")
-
-    robot_description = ParameterValue(Command(["xacro ", LaunchConfiguration("model")]),
-                                       value_type=str)
-
-    robot_state_publisher_node = Node(
-        package="robot_state_publisher",
-        executable="robot_state_publisher",
-        parameters=[{"robot_description": robot_description}]
-    )
-
-    joint_state_publisher_gui = Node(
-        package='joint_state_publisher_gui',
-        executable='joint_state_publisher_gui',
-        name='joint_state_publisher_gui',
-        output='screen'
-    )
 
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',
         name='rviz2',
         output='screen',
+        parameters=[{'use_sim_time': use_sim_time}],
         arguments=['-d', os.path.join(
-            get_package_share_directory('max_description'),
+            max_description_dir,
             'rviz',
             'display.rviz'
         )],
     )
     
     return LaunchDescription([
-        # model_arg,
-        # robot_state_publisher_node,
-        joint_state_publisher_gui,
         rviz_node,
     ])
