@@ -7,45 +7,45 @@
   
   <gazebo reference="fl_wheel_link">
     <material>${wheel_color}</material>
-    <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
+    <mu1>1.5</mu1>
+    <mu2>0.5</mu2>
     <kp>100000.0</kp>
-    <kd>5.0</kd>
+    <kd>10.0</kd>
     <minDepth>0.001</minDepth>
-    <maxVel>0.2</maxVel>
+    <maxVel>0.5</maxVel>
     <fdir1>1 0 0</fdir1>
   </gazebo>
 
   <gazebo reference="fr_wheel_link">
     <material>${wheel_color}</material>
-    <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
+    <mu1>1.5</mu1>
+    <mu2>0.5</mu2>
     <kp>100000.0</kp>
-    <kd>5.0</kd>
+    <kd>10.0</kd>
     <minDepth>0.001</minDepth>
-    <maxVel>0.2</maxVel>
+    <maxVel>0.5</maxVel>
     <fdir1>1 0 0</fdir1>
   </gazebo>
 
   <gazebo reference="rl_wheel_link">
     <material>${wheel_color}</material>
-    <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
+    <mu1>1.5</mu1>
+    <mu2>0.5</mu2>
     <kp>100000.0</kp>
-    <kd>5.0</kd>
+    <kd>10.0</kd>
     <minDepth>0.001</minDepth>
-    <maxVel>0.2</maxVel>
+    <maxVel>0.5</maxVel>
     <fdir1>1 0 0</fdir1>
   </gazebo>
 
   <gazebo reference="rr_wheel_link">
     <material>${wheel_color}</material>
-    <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
+    <mu1>1.5</mu1>
+    <mu2>0.5</mu2>
     <kp>100000.0</kp>
-    <kd>5.0</kd>
+    <kd>10.0</kd>
     <minDepth>0.001</minDepth>
-    <maxVel>0.2</maxVel>
+    <maxVel>0.5</maxVel>
     <fdir1>1 0 0</fdir1>
   </gazebo>
 
