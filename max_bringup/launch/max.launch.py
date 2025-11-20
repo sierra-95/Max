@@ -19,7 +19,10 @@ def generate_launch_description():
             get_package_share_directory('max_universal'),
             'launch',
             'universal.launch.py'
-        )
+        ),
+        launch_arguments={
+            "use_sim_time": "False"
+        }.items()
     )
 
     return LaunchDescription([

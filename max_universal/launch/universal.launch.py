@@ -12,7 +12,7 @@ def generate_launch_description():
 
     use_plotjuggler_arg = DeclareLaunchArgument(
         "use_plotjuggler",
-        default_value="True",
+        default_value="False",
         description="Launch PlotJuggler GUI"
     )
     

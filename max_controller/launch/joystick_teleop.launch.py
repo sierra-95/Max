@@ -2,8 +2,11 @@ import os
 from launch import LaunchDescription
 from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
+from launch.substitutions import LaunchConfiguration
 
 def generate_launch_description():
+
+    use_sim_time = LaunchConfiguration("use_sim_time")
 
     joy_node = Node(
         package='joy',
@@ -15,7 +18,10 @@ def generate_launch_description():
     joy_teleop = Node(
         package='joy_teleop',
         executable='joy_teleop',
-        parameters=[os.path.join(get_package_share_directory('max_controller'), 'config', 'joy_teleop.yaml')]
+        parameters=[
+            os.path.join(get_package_share_directory('max_controller'), 'config', 'joy_teleop.yaml'),
+            {'use_sim_time': use_sim_time}
+        ]
     )
 
     teleop_twist_joy = Node(
@@ -27,7 +33,8 @@ def generate_launch_description():
                 get_package_share_directory('max_controller'),
                 'config',
                 'teleop_twist_joy.yaml'
-            )
+            ),
+            {'use_sim_time': use_sim_time}
         ],
         remappings=[('/cmd_vel', '/max_controller/cmd_vel')]
     )
