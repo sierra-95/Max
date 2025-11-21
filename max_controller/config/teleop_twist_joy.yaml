@@ -13,4 +13,4 @@ teleop_twist_joy_node:
     scale_linear_turbo.x: 0.425
     scale_angular_turbo.yaw: 2.99
 
-    publish_stamped_twist: true
+    publish_stamped_twist: false

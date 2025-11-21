@@ -15,16 +15,16 @@ SimpleController::SimpleController(const std::string& name)
     RCLCPP_INFO_STREAM(get_logger(), "Using wheel radius " << wheel_radius_);
     RCLCPP_INFO_STREAM(get_logger(), "Using wheel separation " << wheel_separation_);
     wheel_cmd_pub_ = create_publisher<std_msgs::msg::Float64MultiArray>("/simple_velocity_controller/commands", 10);
-    vel_sub_ = create_subscription<geometry_msgs::msg::TwistStamped>("/max_controller/cmd_vel", 10, std::bind(&SimpleController::velCallback, this, _1));
+    vel_sub_ = create_subscription<geometry_msgs::msg::Twist>("/max_controller/cmd_vel", 10, std::bind(&SimpleController::velCallback, this, _1));
 
     speed_conversion_ << wheel_radius_/2, wheel_radius_/2, wheel_radius_/wheel_separation_, -wheel_radius_/wheel_separation_;
     RCLCPP_INFO_STREAM(get_logger(), "The conversion matrix is \n" << speed_conversion_);
 }
 
 
-void SimpleController::velCallback(const geometry_msgs::msg::TwistStamped &msg)
+void SimpleController::velCallback(const geometry_msgs::msg::Twist &msg)
 {
-    Eigen::Vector2d robot_speed(msg.twist.linear.x, msg.twist.angular.z);
+    Eigen::Vector2d robot_speed(msg.linear.x, msg.angular.z);
     Eigen::Vector2d wheel_speed = speed_conversion_.inverse() * robot_speed;
 
     std_msgs::msg::Float64MultiArray wheel_speed_msg;

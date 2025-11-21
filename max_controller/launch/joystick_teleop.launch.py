@@ -36,7 +36,7 @@ def generate_launch_description():
             ),
             {'use_sim_time': use_sim_time}
         ],
-        remappings=[('/cmd_vel', '/max_controller/cmd_vel')]
+        remappings=[('/cmd_vel', '/input_joy/cmd_vel')]
     )
 
 
