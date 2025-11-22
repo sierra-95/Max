@@ -12,7 +12,7 @@ def generate_launch_description():
 
     use_slam_arg = DeclareLaunchArgument(
         "use_slam",
-        default_value="True",
+        default_value="False",
         description="Launch SLAM package"
     )
 
