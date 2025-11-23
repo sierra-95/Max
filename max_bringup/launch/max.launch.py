@@ -23,6 +23,12 @@ def generate_launch_description():
         default_value="False",
     )
 
+    max_description = get_package_share_directory('max_description')
+    max_controller = get_package_share_directory('max_controller')
+    max_firmware = get_package_share_directory('max_firmware')
+    max_universal = get_package_share_directory('max_universal')
+    max_bringup = get_package_share_directory('max_bringup')
+
     model_arg = DeclareLaunchArgument(
         name='model',
         default_value=os.path.join(
@@ -47,12 +53,6 @@ def generate_launch_description():
         ]), 
         value_type=str
     )
-
-    max_description = get_package_share_directory('max_description')
-    max_controller = get_package_share_directory('max_controller')
-    max_firmware = get_package_share_directory('max_firmware')
-    max_universal = get_package_share_directory('max_universal')
-    max_bringup = get_package_share_directory('max_bringup')
 
     master = GroupAction(
         condition = IfCondition(use_master),
