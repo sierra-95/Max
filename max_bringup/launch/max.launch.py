@@ -120,6 +120,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         model_arg,
+        use_sim_time_arg,
         use_slam_arg,
         use_master_arg,
         master,
