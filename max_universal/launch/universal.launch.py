@@ -18,10 +18,8 @@ def generate_launch_description():
     
     use_plotjuggler = LaunchConfiguration("use_plotjuggler")
     use_slam = LaunchConfiguration("use_slam")
-    use_rviz = LaunchConfiguration("use_rviz")
 
     max_controller = get_package_share_directory('max_controller')
-    max_description = get_package_share_directory('max_description')
     max_localization = get_package_share_directory('max_localization')
     max_mapping = get_package_share_directory('max_mapping')
 
@@ -53,15 +51,6 @@ def generate_launch_description():
         condition=IfCondition(use_plotjuggler)
     )
 
-    rviz2 = IncludeLaunchDescription(
-        os.path.join(
-            max_description,
-            'launch',
-            'display.launch.py'
-        ),
-        condition=IfCondition(use_rviz)
-    )
-
     localization =  IncludeLaunchDescription(
         os.path.join(
             max_localization,
@@ -91,7 +80,6 @@ def generate_launch_description():
         controller,
         joystick,
         plotjuggler_node,
-        rviz2,
         localization,
         slam,
         safety_stop,

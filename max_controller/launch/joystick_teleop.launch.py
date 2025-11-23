@@ -10,15 +10,6 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration("use_sim_time")
     max_controller = get_package_share_directory('max_controller')
 
-    joy_node = Node(
-        package='joy',
-        executable='joy_node',
-        name='joystick',
-        parameters=[
-            os.path.join(max_controller, 'config', 'joy_config.yaml')
-        ]
-    )
-
     joy_teleop = Node(
         package='joy_teleop',
         executable='joy_teleop',
@@ -51,7 +42,6 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        joy_node,
         teleop_twist_joy,
         twist_mux_launch
     ])

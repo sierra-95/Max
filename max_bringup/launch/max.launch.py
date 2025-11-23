@@ -1,61 +1,127 @@
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
-from launch.substitutions import LaunchConfiguration
+from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, GroupAction
+from launch.substitutions import LaunchConfiguration, Command
+from launch_ros.parameter_descriptions import ParameterValue
+from launch.conditions import IfCondition, UnlessCondition
 from launch_ros.actions import Node
 
 
 def generate_launch_description():
 
+    use_sim_time_arg = DeclareLaunchArgument(
+        "use_sim_time",
+        default_value="False",
+    )
     use_slam_arg = DeclareLaunchArgument(
         "use_slam",
         default_value="True",
     )
-    use_slam = LaunchConfiguration("use_slam")
+    use_master_arg = DeclareLaunchArgument(
+        "use_master",
+        default_value="False",
+    )
 
+    model_arg = DeclareLaunchArgument(
+        name='model',
+        default_value=os.path.join(
+            max_description,
+            'urdf',
+            'max.urdf.xacro'
+        ),
+        description='Absolute path to robot urdf file'
+    )
+
+    use_slam = LaunchConfiguration("use_slam")
+    use_master = LaunchConfiguration("use_master")
+    use_sim_time = LaunchConfiguration("use_sim_time")
+
+    robot_description = ParameterValue(
+        Command([
+            "xacro", 
+            " ",
+            LaunchConfiguration('model'),
+            " ",
+            "is_sim:=false",
+        ]), 
+        value_type=str
+    )
+
+    max_description = get_package_share_directory('max_description')
+    max_controller = get_package_share_directory('max_controller')
     max_firmware = get_package_share_directory('max_firmware')
     max_universal = get_package_share_directory('max_universal')
     max_bringup = get_package_share_directory('max_bringup')
 
-    hardware_interface = IncludeLaunchDescription(
-        os.path.join(
-            max_firmware,
-            'launch',
-            'hardware_interface.launch.py'
-        )
-    )
+    master = GroupAction(
+        condition = IfCondition(use_master),
+        actions = [
+            Node(
+                package='robot_state_publisher',
+                executable='robot_state_publisher',
+                parameters=[{"robot_description": robot_description}],
+                output='screen'
+            ),
+            Node(
+                package='joy',
+                executable='joy_node',
+                name='joystick',
+                parameters=[
+                    os.path.join(max_controller, 'config', 'joy_config.yaml')
+                ]
+            ),
+            IncludeLaunchDescription(
+                os.path.join(
+                    max_description,
+                    'launch',
+                    'display.launch.py'
+                )
+            )
 
-    rplidar = Node(
-        package='rplidar_ros',
-        executable='rplidar_node',
-        name='rplidar_node',
-        output='screen',
-        parameters=[
-            os.path.join(
-                max_bringup,
-                'config',
-                'rplidar_a1.yaml'
+        ]
+    )
+    slave = GroupAction(
+        condition = UnlessCondition(use_master),
+        actions = [
+            IncludeLaunchDescription(
+                os.path.join(
+                    max_firmware,
+                    'launch',
+                    'hardware_interface.launch.py'
+                )
+            ),
+            Node(
+                package='rplidar_ros',
+                executable='rplidar_node',
+                name='rplidar_node',
+                output='screen',
+                parameters=[
+                    os.path.join(
+                        max_bringup,
+                        'config',
+                        'rplidar_a1.yaml'
+                    )
+                ]
+            ),
+            IncludeLaunchDescription(
+                os.path.join(
+                    max_universal,
+                    'launch',
+                    'universal.launch.py'
+                ),
+                launch_arguments={
+                    "use_sim_time": use_sim_time,
+                    "use_slam": use_slam,
+                }.items()
             )
         ]
     )
 
-    universal = IncludeLaunchDescription(
-        os.path.join(
-            max_universal,
-            'launch',
-            'universal.launch.py'
-        ),
-        launch_arguments={
-            "use_sim_time": "False",
-            "use_slam": use_slam,
-            "use_rviz": "False"
-        }.items()
-    )
-
     return LaunchDescription([
+        model_arg,
         use_slam_arg,
-        hardware_interface,
-        rplidar,
-        universal
+        use_master_arg,
+        master,
+        slave,
     ])
