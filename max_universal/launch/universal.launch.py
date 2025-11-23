@@ -10,12 +10,6 @@ from launch.conditions import IfCondition, UnlessCondition
 
 def generate_launch_description():
 
-    use_slam_arg = DeclareLaunchArgument(
-        "use_slam",
-        default_value="False",
-        description="Launch SLAM package"
-    )
-
     use_plotjuggler_arg = DeclareLaunchArgument(
         "use_plotjuggler",
         default_value="False",
@@ -24,6 +18,7 @@ def generate_launch_description():
     
     use_plotjuggler = LaunchConfiguration("use_plotjuggler")
     use_slam = LaunchConfiguration("use_slam")
+    use_rviz = LaunchConfiguration("use_rviz")
 
     max_controller = get_package_share_directory('max_controller')
     max_description = get_package_share_directory('max_description')
@@ -63,7 +58,8 @@ def generate_launch_description():
             max_description,
             'launch',
             'display.launch.py'
-        )
+        ),
+        condition=IfCondition(use_rviz)
     )
 
     localization =  IncludeLaunchDescription(
@@ -92,7 +88,6 @@ def generate_launch_description():
 
     return LaunchDescription([
         use_plotjuggler_arg,
-        use_slam_arg,
         controller,
         joystick,
         plotjuggler_node,
