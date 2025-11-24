@@ -1,7 +1,7 @@
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, GroupAction
+from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, GroupAction, TimerAction
 from launch.substitutions import LaunchConfiguration, Command
 from launch_ros.parameter_descriptions import ParameterValue
 from launch.conditions import IfCondition, UnlessCondition
@@ -98,26 +98,31 @@ def generate_launch_description():
                     )
                 ]
             ),
-            IncludeLaunchDescription(
-                os.path.join(
-                    max_firmware,
-                    'launch',
-                    'hardware_interface.launch.py'
-                ),
-                launch_arguments={
-                    "model": use_model,
-                }.items()
-            ),
-            IncludeLaunchDescription(
-                os.path.join(
-                    max_universal,
-                    'launch',
-                    'universal.launch.py'
-                ),
-                launch_arguments={
-                    "use_sim_time": use_sim_time,
-                    "use_slam": use_slam,
-                }.items()
+            TimerAction(
+                period=3.0,
+                actions=[
+                    IncludeLaunchDescription(
+                        os.path.join(
+                            max_firmware,
+                            'launch',
+                            'hardware_interface.launch.py'
+                        ),
+                        launch_arguments={
+                            "model": use_model,
+                        }.items()
+                    ),
+                    IncludeLaunchDescription(
+                        os.path.join(
+                            max_universal,
+                            'launch',
+                            'universal.launch.py'
+                        ),
+                        launch_arguments={
+                            "use_sim_time": use_sim_time,
+                            "use_slam": use_slam,
+                        }.items()
+                    )
+                ]
             )
         ]
     )
