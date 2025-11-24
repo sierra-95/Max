@@ -86,19 +86,6 @@ def generate_launch_description():
     slave = GroupAction(
         condition = UnlessCondition(use_master),
         actions = [
-            # Node(
-            #     package='rplidar_ros',
-            #     executable='rplidar_node',
-            #     name='rplidar_node',
-            #     output='screen',
-            #     parameters=[
-            #         os.path.join(
-            #             max_bringup,
-            #             'config',
-            #             'rplidar_a1.yaml'
-            #         )
-            #     ]
-            # ),
             IncludeLaunchDescription(
                 PythonLaunchDescriptionSource(
                     os.path.join(
@@ -118,7 +105,7 @@ def generate_launch_description():
                 }.items()
             ),
             TimerAction(
-                period=4.0,
+                period=3.0,
                 actions=[
                     IncludeLaunchDescription(
                         os.path.join(
