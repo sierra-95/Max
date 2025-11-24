@@ -85,16 +85,6 @@ def generate_launch_description():
     slave = GroupAction(
         condition = UnlessCondition(use_master),
         actions = [
-            IncludeLaunchDescription(
-                os.path.join(
-                    max_firmware,
-                    'launch',
-                    'hardware_interface.launch.py'
-                ),
-                launch_arguments={
-                    "model": use_model,
-                }.items()
-            ),
             Node(
                 package='rplidar_ros',
                 executable='rplidar_node',
@@ -107,6 +97,16 @@ def generate_launch_description():
                         'rplidar_a1.yaml'
                     )
                 ]
+            ),
+            IncludeLaunchDescription(
+                os.path.join(
+                    max_firmware,
+                    'launch',
+                    'hardware_interface.launch.py'
+                ),
+                launch_arguments={
+                    "model": use_model,
+                }.items()
             ),
             IncludeLaunchDescription(
                 os.path.join(
