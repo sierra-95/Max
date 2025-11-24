@@ -9,19 +9,7 @@ from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
 
-    max_description = get_package_share_directory('max_description')
     max_controller = get_package_share_directory('max_controller')
-
-    model_arg = DeclareLaunchArgument(
-        name='model',
-        default_value=os.path.join(
-            max_description,
-            'urdf',
-            'max.urdf.xacro'
-        ),
-        description='Absolute path to robot urdf file'
-    )
-
 
     robot_description = ParameterValue(
         Command([
@@ -50,6 +38,5 @@ def generate_launch_description():
         output='screen'
     )
     return LaunchDescription([
-        model_arg,
         controller_manager
     ])

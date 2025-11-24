@@ -39,6 +39,7 @@ def generate_launch_description():
         description='Absolute path to robot urdf file'
     )
 
+    use_model = LaunchConfiguration("model")
     use_slam = LaunchConfiguration("use_slam")
     use_master = LaunchConfiguration("use_master")
     use_sim_time = LaunchConfiguration("use_sim_time")
@@ -47,7 +48,7 @@ def generate_launch_description():
         Command([
             "xacro", 
             " ",
-            LaunchConfiguration('model'),
+            use_model,
             " ",
             "is_sim:=false",
         ]), 
@@ -89,7 +90,10 @@ def generate_launch_description():
                     max_firmware,
                     'launch',
                     'hardware_interface.launch.py'
-                )
+                ),
+                launch_arguments={
+                    "model": use_model,
+                }.items()
             ),
             Node(
                 package='rplidar_ros',
