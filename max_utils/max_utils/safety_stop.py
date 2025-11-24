@@ -21,8 +21,8 @@ class State(Enum):
 class SafetyStop(Node):
     def __init__(self):
         super().__init__('safety_stop_node')
-        self.declare_parameter('warning_distance', 0.6)
-        self.declare_parameter('danger_distance', 0.2)
+        self.declare_parameter('warning_distance', 0.06)
+        self.declare_parameter('danger_distance', 0.03)
         self.declare_parameter('lidar_offset', 0.15)
         self.declare_parameter('scan_topic', 'scan')
         self.declare_parameter('safety_stop_topic', 'safety_stop')
