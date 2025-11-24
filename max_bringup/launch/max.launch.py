@@ -99,7 +99,7 @@ def generate_launch_description():
                 ]
             ),
             TimerAction(
-                period=3.0,
+                period=4.0,
                 actions=[
                     IncludeLaunchDescription(
                         os.path.join(
