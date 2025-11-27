@@ -82,4 +82,5 @@ def generate_launch_description():
         plotjuggler_node,
         localization,
         slam,
+        safety_stop
     ])
