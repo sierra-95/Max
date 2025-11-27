@@ -23,7 +23,7 @@ class SafetyStop(Node):
         super().__init__('safety_stop_node')
         self.declare_parameter('warning_distance', 0.40)
         self.declare_parameter('danger_distance', 0.20)
-        self.declare_parameter('lidar_offset', 0.15)
+        self.declare_parameter('lidar_offset', 0.105)
         self.declare_parameter('scan_topic', 'scan')
         self.declare_parameter('safety_stop_topic', 'safety_stop')
         self.pre_warning_distance = self.get_parameter('warning_distance').get_parameter_value().double_value
