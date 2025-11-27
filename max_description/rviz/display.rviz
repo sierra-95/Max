@@ -60,9 +60,9 @@ Visualization Manager:
           Value: true
         camera_link:
           Value: true
-        fl_wheel_link:
+        fl_roller_wheel:
           Value: true
-        fr_wheel_link:
+        fr_roller_wheel:
           Value: true
         lidar_link:
           Value: true
@@ -84,9 +84,9 @@ Visualization Manager:
           base_link:
             camera_link:
               {}
-            fl_wheel_link:
+            fl_roller_wheel:
               {}
-            fr_wheel_link:
+            fr_roller_wheel:
               {}
             lidar_link:
               {}
@@ -132,12 +132,12 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        fl_wheel_link:
+        fl_roller_wheel:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        fr_wheel_link:
+        fr_roller_wheel:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -201,7 +201,7 @@ Visualization Manager:
       Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
-      Max Intensity: 47
+      Max Intensity: 0
       Min Color: 0; 0; 0
       Min Intensity: 0
       Name: LaserScan
@@ -293,10 +293,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.6103977560997009
+      Pitch: 0.5053976774215698
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.19536298513412476
+      Yaw: 0.21036295592784882
     Saved: ~
 Window Geometry:
   Displays:
