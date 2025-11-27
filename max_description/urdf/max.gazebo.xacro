@@ -7,14 +7,14 @@
   
   <gazebo reference="fr_roller_wheel">
     <material>${wheel_color}</material>
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
+    <mu1>0.1</mu1>
+    <mu2>0.1</mu2>
   </gazebo>
 
   <gazebo reference="fl_roller_wheel">
     <material>${wheel_color}</material>
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
+    <mu1>0.1</mu1>
+    <mu2>0.1</mu2>
   </gazebo>
 
   <gazebo reference="rl_wheel_link">
