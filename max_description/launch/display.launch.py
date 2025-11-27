@@ -9,6 +9,10 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration("use_sim_time")
     max_description_dir = get_package_share_directory("max_description")
 
+    joint_state_publisher_gui_node = Node(
+        package="joint_state_publisher_gui",
+        executable="joint_state_publisher_gui"
+    )
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',
