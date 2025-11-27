@@ -15,8 +15,6 @@ controller_manager:
 simple_velocity_controller:
   ros__parameters:
     joints:
-      - fl_joint
-      - fr_joint
       - rl_joint
       - rr_joint
 
@@ -24,8 +22,8 @@ max_controller:
   ros__parameters:
     type: diff_drive_controller/DiffDriveController
     use_stamped_vel: false
-    left_wheel_names: ["fl_joint", "rl_joint"]
-    right_wheel_names: ["fr_joint", "rr_joint"]
+    left_wheel_names: ["rl_joint"]
+    right_wheel_names: ["rr_joint"]
     
     publish_rate: 50.0
     pose_covariance_diagonal : [0.001, 0.001, 1.0e-3, 1.0e-3, 1.0e-3, 0.01]

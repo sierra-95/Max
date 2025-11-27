@@ -17,22 +17,6 @@
     </xacro:unless>
     
   </gazebo>
-  
-  <transmission name="fl_transmission">
-    <plugin>transmission_interface/SimpleTransmission</plugin>
-    <joint name="fl_joint" role="joint_fl">
-      <mechanical_reduction>1.0</mechanical_reduction>
-    </joint>
-    <actuator name="fl_motor" role="actuator_fl"/>
-  </transmission>
-
-  <transmission name="fr_transmission">
-    <plugin>transmission_interface/SimpleTransmission</plugin>
-    <joint name="fr_joint" role="joint_fr">
-      <mechanical_reduction>1.0</mechanical_reduction>
-    </joint>
-    <actuator name="fr_motor" role="actuator_fr"/>
-  </transmission>
 
   <transmission name="rl_transmission">
     <plugin>transmission_interface/SimpleTransmission</plugin>
