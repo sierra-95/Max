@@ -23,7 +23,7 @@ class SafetyStop(Node):
         super().__init__('safety_stop_node')
         self.declare_parameter('warning_distance', 0.40)
         self.declare_parameter('danger_distance', 0.20)
-        self.declare_parameter('lidar_offset', 0.105)
+        self.declare_parameter('lidar_offset', 0.15)
         self.declare_parameter('scan_topic', 'scan')
         self.declare_parameter('safety_stop_topic', 'safety_stop')
         self.pre_warning_distance = self.get_parameter('warning_distance').get_parameter_value().double_value
@@ -88,13 +88,20 @@ class SafetyStop(Node):
 
     def laser_callback(self, msg: LaserScan):
         self.state = State.FREE
+        #self.get_logger().info(f'First 10 LaserScan ranges: {list(msg.ranges[:10])}')
 
         for range_value in msg.ranges:
+            #self.get_logger().info(f'Current range value: {range_value:.2f} m')
+            
+            if math.isinf(range_value) or range_value < 0.15:
+                continue
 
             if not math.isinf(range_value) and range_value <= self.warning_distance:
+                #self._logger.info(f'Range value {range_value:.2f} m within warning distance {self.warning_distance:.2f} m')
                 self.state = State.WARNING
 
                 if range_value <= self.danger_distance:
+                    #self._logger.info(f'Range value {range_value:.2f} m within danger distance {self.danger_distance:.2f} m')
                     self.state = State.DANGER
                     # Stop immediately!
                     break
