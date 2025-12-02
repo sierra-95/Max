@@ -22,6 +22,7 @@ def generate_launch_description():
     max_controller = get_package_share_directory('max_controller')
     max_localization = get_package_share_directory('max_localization')
     max_mapping = get_package_share_directory('max_mapping')
+    max_navigation = get_package_share_directory('max_navigation')
 
     controller = IncludeLaunchDescription(
         os.path.join(
@@ -69,6 +70,14 @@ def generate_launch_description():
         condition=IfCondition(use_slam)
     )
 
+    navigation = IncludeLaunchDescription(
+        os.path.join(
+            max_navigation,
+            'launch',
+            'navigation.launch.py'
+        )
+    )
+
     safety_stop = Node(
         package="max_utils",
         executable="safety_stop.py",
@@ -82,5 +91,6 @@ def generate_launch_description():
         plotjuggler_node,
         localization,
         slam,
+        navigation,
         safety_stop,
     ])
