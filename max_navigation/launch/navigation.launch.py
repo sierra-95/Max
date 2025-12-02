@@ -11,8 +11,7 @@ from launch_ros.actions import Node
 def generate_launch_description():
 
     use_sim_time = LaunchConfiguration("use_sim_time")
-    #lifecycle_nodes = ["controller_server", "planner_server", "smoother_server", "bt_navigator", "behavior_server"]
-    lifecycle_nodes = ["controller_server", "planner_server", "smoother_server"]
+    lifecycle_nodes = ["controller_server", "planner_server", "smoother_server", "bt_navigator", "behavior_server"]
     max_navigation = get_package_share_directory("max_navigation")
 
     use_sim_time_arg = DeclareLaunchArgument(
@@ -47,33 +46,33 @@ def generate_launch_description():
         ],
     )
 
-    # nav2_behaviors = Node(
-    #     package="nav2_behaviors",
-    #     executable="behavior_server",
-    #     name="behavior_server",
-    #     output="screen",
-    #     parameters=[
-    #         os.path.join(
-    #             max_navigation,
-    #             "config",
-    #             "behavior_server.yaml"),
-    #         {"use_sim_time": use_sim_time}
-    #     ],
-    # )
+    nav2_behaviors = Node(
+        package="nav2_behaviors",
+        executable="behavior_server",
+        name="behavior_server",
+        output="screen",
+        parameters=[
+            os.path.join(
+                max_navigation,
+                "config",
+                "behavior_server.yaml"),
+            {"use_sim_time": use_sim_time}
+        ],
+    )
     
-    # nav2_bt_navigator = Node(
-    #     package="nav2_bt_navigator",
-    #     executable="bt_navigator",
-    #     name="bt_navigator",
-    #     output="screen",
-    #     parameters=[
-    #         os.path.join(
-    #             max_navigation,
-    #             "config",
-    #             "bt_navigator.yaml"),
-    #         {"use_sim_time": use_sim_time}
-    #     ],
-    # )
+    nav2_bt_navigator = Node(
+        package="nav2_bt_navigator",
+        executable="bt_navigator",
+        name="bt_navigator",
+        output="screen",
+        parameters=[
+            os.path.join(
+                max_navigation,
+                "config",
+                "bt_navigator.yaml"),
+            {"use_sim_time": use_sim_time}
+        ],
+    )
 
     nav2_smoother_server = Node(
         package="nav2_smoother",
@@ -106,7 +105,7 @@ def generate_launch_description():
         nav2_controller_server,
         nav2_planner_server,
         nav2_smoother_server,
-        # nav2_behaviors,
-        # nav2_bt_navigator,
+        nav2_behaviors,
+        nav2_bt_navigator,
         nav2_lifecycle_manager,
     ])
