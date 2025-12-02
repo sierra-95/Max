@@ -37,7 +37,7 @@ class DijkstraPlanner(Node):
         map_qos.durability = DurabilityPolicy.TRANSIENT_LOCAL
 
         self.map_sub = self.create_subscription(
-            OccupancyGrid, "/map", self.map_callback, map_qos
+            OccupancyGrid, "/costmap/costmap", self.map_callback, map_qos
         )
         self.pose_sub = self.create_subscription(
             PoseStamped, "/goal_pose", self.goal_callback, 10
@@ -104,9 +104,9 @@ class DijkstraPlanner(Node):
                 new_node: GraphNode = active_node + (dir_x, dir_y)
                 
                 if (new_node not in visited_nodes and self.pose_on_map(new_node) and 
-                    self.map_.data[self.pose_to_cell(new_node)] == 0):
+                    0 <= self.map_.data[self.pose_to_cell(new_node)] < 99):
                     
-                    new_node.cost = active_node.cost + 1
+                    new_node.cost = active_node.cost + 1 + self.map_.data[self.pose_to_cell(new_node)]
                     new_node.prev = active_node
 
                     pending_nodes.put(new_node)
