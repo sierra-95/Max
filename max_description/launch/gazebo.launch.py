@@ -97,6 +97,14 @@ def generate_launch_description():
                     executable="create",
                     arguments=["-topic", "robot_description", "-name", "max"],
                     output="screen"
+                ),
+                Node(
+                    package="ros_gz_bridge",
+                    executable="parameter_bridge",
+                    arguments=[
+                        "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
+                        "/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan"
+                    ]
                 )
         ]
     )
