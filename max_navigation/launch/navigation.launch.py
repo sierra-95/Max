@@ -14,11 +14,6 @@ def generate_launch_description():
     lifecycle_nodes = ["controller_server", "planner_server", "smoother_server", "bt_navigator", "behavior_server"]
     max_navigation = get_package_share_directory("max_navigation")
 
-    use_sim_time_arg = DeclareLaunchArgument(
-        "use_sim_time",
-        default_value="true"
-    )
-
     nav2_controller_server = Node(
         package="nav2_controller",
         executable="controller_server",
@@ -101,7 +96,6 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        use_sim_time_arg,
         nav2_controller_server,
         nav2_planner_server,
         nav2_smoother_server,
