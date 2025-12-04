@@ -3,10 +3,10 @@
 // L298N H-Bridge Connection PINs
 #define L298N_enA 5  // PWM
 #define L298N_enB 6  // PWM
-#define L298N_in4 22  // Dir Motor B
-#define L298N_in3 23  // Dir Motor B
-#define L298N_in2 24  // Dir Motor A
-#define L298N_in1 25  // Dir Motor A
+#define L298N_in4 25  // Dir Motor B
+#define L298N_in3 24  // Dir Motor B
+#define L298N_in2 23  // Dir Motor A
+#define L298N_in1 22  // Dir Motor A
 
 // Wheel Encoders Connection PINs
 #define right_encoder_phaseA 19  // Interrupt 

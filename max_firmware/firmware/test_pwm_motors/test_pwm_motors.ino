@@ -1,17 +1,22 @@
-#define ENA 5 
-#define ENB 6  
-#define IN1 22 
-#define IN2 23 
-#define IN3 24  
-#define IN4 25  
+// ----- Pin Definitions -----
+#define ENA 5   //ENA
+#define ENB 6   // ENB
+#define IN1 22  // IN1
+#define IN2 23  // IN2
+#define IN3 24  // IN3
+#define IN4 25  // IN4
+
 
 void setup() {
+  // Front motor pins
   pinMode(ENA, OUTPUT);
   pinMode(ENB, OUTPUT);
   pinMode(IN1, OUTPUT);
   pinMode(IN2, OUTPUT);
   pinMode(IN3, OUTPUT);
   pinMode(IN4, OUTPUT);
+
+  // Ensure all motors are stopped initially
   stopMotors();
 }
 
