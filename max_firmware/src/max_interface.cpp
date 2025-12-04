@@ -190,20 +190,21 @@ hardware_interface::return_type MaxInterface::read(const rclcpp::Time &,
     std::stringstream ss(message);
     std::string res;
     int multiplier = 1;
+    const double scale = 9.5; // Scale factor to convert from Arduino units to m/s
     while(std::getline(ss, res, ','))
     {
       multiplier = res.at(1) == 'p' ? 1 : -1;
 
       if(res.at(0) == 'r')
       {
-        velocity_states_.at(0) = multiplier * std::stod(res.substr(2, res.size()));
+        velocity_states_.at(0) = multiplier * std::stod(res.substr(2, res.size())) * scale;
         position_states_.at(0) += velocity_states_.at(0) * dt;
         // RCLCPP_INFO_STREAM(rclcpp::get_logger("MaxInterface"),
         //                    "Parsed right wheel: " << velocity_states_[0]);
       }
       else if(res.at(0) == 'l')
       {
-        velocity_states_.at(1) = multiplier * std::stod(res.substr(2, res.size()));
+        velocity_states_.at(1) = multiplier * std::stod(res.substr(2, res.size())) * scale;
         position_states_.at(1) += velocity_states_.at(1) * dt;
         // RCLCPP_INFO_STREAM(rclcpp::get_logger("MaxInterface"),
         //                    "Parsed left wheel: " << velocity_states_[1]);
