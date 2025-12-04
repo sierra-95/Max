@@ -9,8 +9,8 @@
 #define L298N_in1 22  // Dir Motor A
 
 // Wheel Encoders Connection PINs
-#define right_encoder_phaseA 19  // Interrupt 
-#define right_encoder_phaseB 18  
+#define right_encoder_phaseA 18  // Interrupt 
+#define right_encoder_phaseB 19  
 #define left_encoder_phaseA 20   // Interrupt
 #define left_encoder_phaseB 21
 
