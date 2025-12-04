@@ -10,7 +10,7 @@
   <buildtool_depend>ament_cmake</buildtool_depend>
 
   <exec_depend>ros2launch</exec_depend>
-  <exec_depend>bumperbot_planning</exec_depend>
+  <exec_depend>nav2_amcl</exec_depend>
   <exec_depend>nav2_controller</exec_depend>
   <exec_depend>nav2_lifecycle_manager</exec_depend>
   <exec_depend>nav2_planner</exec_depend>
