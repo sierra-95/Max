@@ -184,6 +184,9 @@ hardware_interface::return_type MaxInterface::read(const rclcpp::Time &,
     auto dt = (rclcpp::Clock().now() - last_run_).seconds();
     std::string message;
     arduino_.ReadLine(message);
+
+    RCLCPP_INFO_STREAM(rclcpp::get_logger("MaxInterface"), "Raw Arduino message: " << message);
+
     std::stringstream ss(message);
     std::string res;
     int multiplier = 1;
@@ -195,11 +198,15 @@ hardware_interface::return_type MaxInterface::read(const rclcpp::Time &,
       {
         velocity_states_.at(0) = multiplier * std::stod(res.substr(2, res.size()));
         position_states_.at(0) += velocity_states_.at(0) * dt;
+        RCLCPP_INFO_STREAM(rclcpp::get_logger("MaxInterface"),
+                           "Parsed right wheel: " << velocity_states_[0]);
       }
       else if(res.at(0) == 'l')
       {
         velocity_states_.at(1) = multiplier * std::stod(res.substr(2, res.size()));
         position_states_.at(1) += velocity_states_.at(1) * dt;
+        RCLCPP_INFO_STREAM(rclcpp::get_logger("MaxInterface"),
+                           "Parsed left wheel: " << velocity_states_[1]);
       }
     }
     last_run_ = rclcpp::Clock().now();
