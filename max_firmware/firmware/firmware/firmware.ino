@@ -171,8 +171,8 @@ void loop() {
   unsigned long current_millis = millis();
   if(current_millis - last_millis >= interval)
   {
-    right_wheel_meas_vel = (10 * right_encoder_counter * (60.0/385.0)) * 0.10472;
-    left_wheel_meas_vel = (10 * left_encoder_counter * (60.0/385.0)) * 0.10472;
+    right_wheel_meas_vel = (10 * right_encoder_counter * (60.0/3930.0)) * 0.10472;
+    left_wheel_meas_vel = (10 * left_encoder_counter * (60.0/3930.0)) * 0.10472;
     
     rightMotor.Compute();
     leftMotor.Compute();
