@@ -190,7 +190,7 @@ hardware_interface::return_type MaxInterface::read(const rclcpp::Time &,
     std::stringstream ss(message);
     std::string res;
     int multiplier = 1;
-    const double scale = 9.5; // Scale factor to convert from Arduino units to m/s
+    const double scale = 5.0; // Scale factor to convert from Arduino units to m/s
     while(std::getline(ss, res, ','))
     {
       multiplier = res.at(1) == 'p' ? 1 : -1;
