@@ -43,4 +43,4 @@ ros2 launch max_bringup max.simulated.launch.py
 ```bash
 ros2 launch max_bringup max.launch.py
 ```
-
+ros2 launch rplidar_ros rplidar_a1_launch.py serial_port:=/dev/ttyUSB0 serial_baudrate:=115200 frame_id:=lidar_link
