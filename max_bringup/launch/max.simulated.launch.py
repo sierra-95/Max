@@ -1,8 +1,9 @@
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
+from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, GroupAction
 from launch.substitutions import LaunchConfiguration
+from launch.conditions import IfCondition, UnlessCondition
 from launch_ros.actions import Node
 
 
@@ -17,27 +18,57 @@ def generate_launch_description():
         default_value="False",
     )
 
+    use_max_arg = DeclareLaunchArgument(
+        "use_max",
+        default_value="True",
+    )
+
     use_slam = LaunchConfiguration("use_slam")
     use_sim_time = LaunchConfiguration("use_sim_time")
 
     max_universal = get_package_share_directory('max_universal')
     max_controller = get_package_share_directory('max_controller')
     max_description = get_package_share_directory('max_description')
-    
-    gazebo = IncludeLaunchDescription(
-        os.path.join(
-            max_description,
-            'launch',
-            'gazebo.launch.py'
-        )
+    bumperbot_description = get_package_share_directory('bumperbot_description')
+
+    use_max = GroupAction(
+        condition = IfCondition(LaunchConfiguration("use_max")),
+        actions=[
+            IncludeLaunchDescription(
+                os.path.join(
+                    max_description,
+                    'launch',
+                    'gazebo.launch.py'
+                )
+            ),
+            IncludeLaunchDescription(
+                os.path.join(
+                    max_description,
+                    'launch',
+                    'display.launch.py'
+                )
+            )
+        ]
     )
 
-    rviz2 = IncludeLaunchDescription(
-        os.path.join(
-            max_description,
-            'launch',
-            'display.launch.py'
-        )
+    use_bumperbot = GroupAction(
+        condition = UnlessCondition(LaunchConfiguration("use_max")),
+        actions=[
+            IncludeLaunchDescription(
+                os.path.join(
+                    bumperbot_description,
+                    'launch',
+                    'gazebo.launch.py'
+                )
+            ),
+            IncludeLaunchDescription(
+                os.path.join(
+                    bumperbot_description,
+                    'launch',
+                    'display.launch.py'
+                )
+            )
+        ]
     )
 
     joy_node = Node(
@@ -64,8 +95,9 @@ def generate_launch_description():
     return LaunchDescription([
         use_slam_arg,
         use_sim_time_arg,
-        gazebo,
-        rviz2,
+        use_max_arg,
+        use_max,
+        use_bumperbot,
         joy_node,
         universal
     ])
