@@ -1,9 +1,8 @@
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, GroupAction
+from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
-from launch.conditions import IfCondition, UnlessCondition
 from launch_ros.actions import Node
 
 
@@ -29,47 +28,21 @@ def generate_launch_description():
     max_universal = get_package_share_directory('max_universal')
     max_controller = get_package_share_directory('max_controller')
     max_description = get_package_share_directory('max_description')
-    bumperbot_description = get_package_share_directory('bumperbot_description')
 
-    use_max = GroupAction(
-        condition = IfCondition(LaunchConfiguration("use_max")),
-        actions=[
-            IncludeLaunchDescription(
+    gazebo = IncludeLaunchDescription(
                 os.path.join(
                     max_description,
                     'launch',
                     'gazebo.launch.py'
                 )
-            ),
-            IncludeLaunchDescription(
+            )
+    rviz2 = IncludeLaunchDescription(
                 os.path.join(
                     max_description,
                     'launch',
                     'display.launch.py'
                 )
             )
-        ]
-    )
-
-    use_bumperbot = GroupAction(
-        condition = UnlessCondition(LaunchConfiguration("use_max")),
-        actions=[
-            IncludeLaunchDescription(
-                os.path.join(
-                    bumperbot_description,
-                    'launch',
-                    'gazebo.launch.py'
-                )
-            ),
-            IncludeLaunchDescription(
-                os.path.join(
-                    bumperbot_description,
-                    'launch',
-                    'display.launch.py'
-                )
-            )
-        ]
-    )
 
     joy_node = Node(
         package='joy',
@@ -96,8 +69,8 @@ def generate_launch_description():
         use_slam_arg,
         use_sim_time_arg,
         use_max_arg,
-        use_max,
-        use_bumperbot,
+        gazebo,
+        rviz2,
         joy_node,
         universal
     ])
