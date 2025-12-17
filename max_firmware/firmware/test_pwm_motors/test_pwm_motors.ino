@@ -1,10 +1,10 @@
 // ----- Pin Definitions -----
 #define ENA 5   //ENA
 #define ENB 6   // ENB
-#define IN1 30  // IN1
-#define IN2 31  // IN2
-#define IN3 32  // IN3
-#define IN4 33  // IN4
+#define IN1 42 // IN1
+#define IN2 43// IN2
+#define IN3 44// IN3
+#define IN4 45// IN4
 
 
 void setup() {
