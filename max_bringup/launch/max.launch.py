@@ -87,6 +87,12 @@ def generate_launch_description():
                 ),
                 condition=UnlessCondition(use_rtab)
             ),
+            Node(
+                package="plotjuggler",
+                executable="plotjuggler",
+                name="plotjuggler",
+                output="screen",
+            ),
             # GroupAction(
             #     condition=IfCondition(use_rtab),
             #     actions=[

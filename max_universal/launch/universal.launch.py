@@ -38,20 +38,13 @@ def generate_launch_description():
         )
     )
 
-    plotjuggler_node = Node(
-        package="plotjuggler",
-        executable="plotjuggler",
-        name="plotjuggler",
-        output="screen",
-    )
-
     safety_stop = Node(
         package="max_utils",
         executable="safety_stop.py",
         output="screen"
     )
 
-    GroupAction(
+    slam = GroupAction(
         condition=UnlessCondition(use_rtab),
         actions=[
             IncludeLaunchDescription(
@@ -83,6 +76,6 @@ def generate_launch_description():
     return LaunchDescription([
         controller,
         joystick,
-        plotjuggler_node,
-        safety_stop
+        safety_stop,
+        slam
     ])
