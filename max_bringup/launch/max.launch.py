@@ -24,6 +24,11 @@ def generate_launch_description():
         default_value="False",
     )
 
+    use_rtab_arg = DeclareLaunchArgument(
+        "use_rtab",
+        default_value="True",
+    )
+
     max_description = get_package_share_directory('max_description')
     max_controller = get_package_share_directory('max_controller')
     max_firmware = get_package_share_directory('max_firmware')
@@ -44,6 +49,7 @@ def generate_launch_description():
     use_slam = LaunchConfiguration("use_slam")
     use_master = LaunchConfiguration("use_master")
     use_sim_time = LaunchConfiguration("use_sim_time")
+    use_rtab = LaunchConfiguration("use_rtab")
 
     robot_description = ParameterValue(
         Command([
@@ -79,8 +85,29 @@ def generate_launch_description():
                     'launch',
                     'display.launch.py'
                 )
+            ),
+            GroupAction(
+                condition=IfCondition(use_rtab),
+                actions=[
+                IncludeLaunchDescription(
+                    PythonLaunchDescriptionSource(
+                        os.path.join(
+                            get_package_share_directory('rtabmap_launch'),
+                            'launch',
+                            'rtabmap.launch.py'
+                        )
+                    ),
+                    launch_arguments={
+                        'depth_topic': '/camera/depth/image_raw',
+                        'rgb_topic': '/camera/color/image_raw',
+                        'camera_info_topic': '/camera/color/camera_info',
+                        'frame_id': 'base_link',
+                        'approx_sync': 'true',
+                        'rtabmap_args': '--delete_db_on_start'
+                    }.items()
+                )
+                ]
             )
-
         ]
     )
     slave = GroupAction(
@@ -138,6 +165,7 @@ def generate_launch_description():
         use_sim_time_arg,
         use_slam_arg,
         use_master_arg,
+        use_rtab_arg,
         master,
         slave,
     ])
