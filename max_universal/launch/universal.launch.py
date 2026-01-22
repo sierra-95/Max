@@ -1,7 +1,7 @@
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
+from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, GroupAction
 from launch_ros.actions import Node
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
@@ -10,14 +10,8 @@ from launch.conditions import IfCondition, UnlessCondition
 
 def generate_launch_description():
 
-    use_plotjuggler_arg = DeclareLaunchArgument(
-        "use_plotjuggler",
-        default_value="False",
-        description="Launch PlotJuggler GUI"
-    )
-    
-    use_plotjuggler = LaunchConfiguration("use_plotjuggler")
     use_slam = LaunchConfiguration("use_slam")
+    use_rtab = LaunchConfiguration("use_rtab")
 
     max_controller = get_package_share_directory('max_controller')
     max_localization = get_package_share_directory('max_localization')
@@ -49,33 +43,6 @@ def generate_launch_description():
         executable="plotjuggler",
         name="plotjuggler",
         output="screen",
-        condition=IfCondition(use_plotjuggler)
-    )
-
-    localization =  IncludeLaunchDescription(
-        os.path.join(
-            max_localization,
-            'launch',
-            'global_localization.launch.py'
-        ),
-        condition=UnlessCondition(use_slam)
-    )
-
-    slam = IncludeLaunchDescription(
-        os.path.join(
-            max_mapping,
-            'launch',
-            'slam.launch.py'
-        ),
-        condition=IfCondition(use_slam)
-    )
-
-    navigation = IncludeLaunchDescription(
-        os.path.join(
-            max_navigation,
-            'launch',
-            'navigation.launch.py'
-        )
     )
 
     safety_stop = Node(
@@ -84,13 +51,38 @@ def generate_launch_description():
         output="screen"
     )
 
+    GroupAction(
+        condition=UnlessCondition(use_rtab),
+        actions=[
+            IncludeLaunchDescription(
+                os.path.join(
+                    max_localization,
+                    'launch',
+                    'global_localization.launch.py'
+                ),
+                condition=UnlessCondition(use_slam)
+            ),
+            IncludeLaunchDescription(
+                os.path.join(
+                    max_mapping,
+                    'launch',
+                    'slam.launch.py'
+                ),
+                condition=IfCondition(use_slam)
+            ),
+            IncludeLaunchDescription(
+                os.path.join(
+                    max_navigation,
+                    'launch',
+                    'navigation.launch.py'
+                )
+            )
+        ]
+    )
+
     return LaunchDescription([
-        use_plotjuggler_arg,
         controller,
         joystick,
         plotjuggler_node,
-        localization,
-        slam,
-        navigation,
         safety_stop
     ])

@@ -26,7 +26,7 @@ def generate_launch_description():
 
     use_rtab_arg = DeclareLaunchArgument(
         "use_rtab",
-        default_value="True",
+        default_value="False",
     )
 
     max_description = get_package_share_directory('max_description')
@@ -84,7 +84,8 @@ def generate_launch_description():
                     max_description,
                     'launch',
                     'display.launch.py'
-                )
+                ),
+                condition=UnlessCondition(use_rtab)
             ),
             GroupAction(
                 condition=IfCondition(use_rtab),
@@ -113,24 +114,17 @@ def generate_launch_description():
     slave = GroupAction(
         condition = UnlessCondition(use_master),
         actions = [
-            # IncludeLaunchDescription(
-            #     PythonLaunchDescriptionSource(
-            #         os.path.join(
-            #             get_package_share_directory("rplidar_ros"),
-            #             "launch",
-            #             "rplidar_a1_launch.py"
-            #         )
-            #     ),
-            #     launch_arguments={
-            #         "channel_type": "serial",
-            #         "serial_port": "/dev/ttyUSB0",
-            #         "serial_baudrate": "115200",
-            #         "frame_id": "lidar_link",
-            #         "inverted": "false",
-            #         "angle_compensate": "true",
-            #         "scan_mode": "Sensitivity",
-            #     }.items()
-            # ),
+            Node(
+                package="rplidar_ros",
+                executable="rplidar_node",
+                name="rplidar_node",
+                parameters=[os.path.join(
+                    max_bringup,
+                    "config",
+                    "rplidar_a1.yaml"
+                )],
+                output="screen"
+            ),
             TimerAction(
                 period=3.0,
                 actions=[
@@ -153,6 +147,7 @@ def generate_launch_description():
                         launch_arguments={
                             "use_sim_time": use_sim_time,
                             "use_slam": use_slam,
+                            "use_rtab": use_rtab,
                         }.items()
                     )
                 ]

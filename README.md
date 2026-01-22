@@ -44,3 +44,14 @@ ros2 launch max_bringup max.simulated.launch.py
 ros2 launch max_bringup max.launch.py
 ```
 ros2 launch rplidar_ros rplidar_a1_launch.py serial_port:=/dev/ttyUSB0 serial_baudrate:=115200 frame_id:=lidar_link
+
+ros2 launch astra_camera astra_pro.launch.xml
+
+ros2 launch rtabmap_demos robot_mapping_demo.launch.py \
+  rviz:=true \
+  rtabmap_viz:=true \
+  rgb/image:=/camera/color/image_raw \
+  depth/image:=/camera/depth/image_raw \
+  rgb/camera_info:=/camera/color/camera_info \
+  depth/camera_info:=/camera/depth/camera_info \
+  scan:=/scan

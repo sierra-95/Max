@@ -22,27 +22,33 @@ def generate_launch_description():
         default_value="True",
     )
 
+    use_rtab_arg = DeclareLaunchArgument(
+        "use_rtab",
+        default_value="False",
+    )
+
     use_slam = LaunchConfiguration("use_slam")
     use_sim_time = LaunchConfiguration("use_sim_time")
+    use_rtab = LaunchConfiguration("use_rtab")
 
     max_universal = get_package_share_directory('max_universal')
     max_controller = get_package_share_directory('max_controller')
     max_description = get_package_share_directory('max_description')
 
     gazebo = IncludeLaunchDescription(
-                os.path.join(
-                    max_description,
-                    'launch',
-                    'gazebo.launch.py'
-                )
-            )
+        os.path.join(
+            max_description,
+            'launch',
+            'gazebo.launch.py'
+        )
+    )
     rviz2 = IncludeLaunchDescription(
-                os.path.join(
-                    max_description,
-                    'launch',
-                    'display.launch.py'
-                )
-            )
+        os.path.join(
+            max_description,
+            'launch',
+            'display.launch.py'
+        )
+    )
 
     joy_node = Node(
         package='joy',
@@ -62,6 +68,7 @@ def generate_launch_description():
         launch_arguments={
             "use_sim_time": use_sim_time,
             "use_slam": use_slam,
+            "use_rtab": use_rtab,
         }.items()
     )
 
@@ -69,6 +76,7 @@ def generate_launch_description():
         use_slam_arg,
         use_sim_time_arg,
         use_max_arg,
+        use_rtab_arg,
         gazebo,
         rviz2,
         joy_node,
