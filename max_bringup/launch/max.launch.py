@@ -33,7 +33,6 @@ def generate_launch_description():
     max_controller = get_package_share_directory('max_controller')
     max_firmware = get_package_share_directory('max_firmware')
     max_universal = get_package_share_directory('max_universal')
-    max_bringup = get_package_share_directory('max_bringup')
 
     model_arg = DeclareLaunchArgument(
         name='model',
@@ -120,16 +119,23 @@ def generate_launch_description():
     slave = GroupAction(
         condition = UnlessCondition(use_master),
         actions = [
-            # Node(
-            #     package="rplidar_ros",
-            #     executable="rplidar_node",
-            #     name="rplidar_node",
-            #     parameters=[os.path.join(
-            #         max_bringup,
-            #         "config",
-            #         "rplidar_a1.yaml"
-            #     )],
-            #     output="screen"
+            # IncludeLaunchDescription(
+            #     PythonLaunchDescriptionSource(
+            #         os.path.join(
+            #             get_package_share_directory("rplidar_ros"),
+            #             "launch",
+            #             "rplidar_a1_launch.py"
+            #         )
+            #     ),
+            #     launch_arguments={
+            #         "channel_type": "serial",
+            #         "serial_port": "/dev/ttyUSB0",
+            #         "serial_baudrate": "115200",
+            #         "frame_id": "lidar_link",
+            #         "inverted": "false",
+            #         "angle_compensate": "true",
+            #         "scan_mode": "Sensitivity",
+            #     }.items()
             # ),
             TimerAction(
                 period=3.0,

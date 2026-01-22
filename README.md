@@ -49,9 +49,4 @@ ros2 launch astra_camera astra_pro.launch.xml
 
 ros2 launch rtabmap_demos robot_mapping_demo.launch.py \
   rviz:=true \
-  rtabmap_viz:=true \
-  rgb/image:=/camera/color/image_raw \
-  depth/image:=/camera/depth/image_raw \
-  rgb/camera_info:=/camera/color/camera_info \
-  depth/camera_info:=/camera/depth/camera_info \
-  scan:=/scan
+  rtabmap_viz:=true
