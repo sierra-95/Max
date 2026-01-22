@@ -83,8 +83,7 @@ def generate_launch_description():
                     max_description,
                     'launch',
                     'display.launch.py'
-                ),
-                condition=UnlessCondition(use_rtab)
+                )
             ),
             Node(
                 package="plotjuggler",
