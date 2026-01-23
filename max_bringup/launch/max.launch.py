@@ -108,7 +108,7 @@ def generate_launch_description():
                         'camera_info_topic': '/camera/color/camera_info',
                         'frame_id': 'base_footprint',
                         'odom_topic': '/max_controller/odom',
-                        'subscribe_scan': 'true',
+                        # 'subscribe_scan': 'true',
                         'approx_sync': 'true',
                         'rtabmap_args': '--delete_db_on_start'
                     }.items()
