@@ -83,7 +83,11 @@ def generate_launch_description():
                     max_description,
                     'launch',
                     'display.launch.py'
-                )
+                ),
+                launch_arguments={
+                    "use_sim_time": use_sim_time,
+                    "use_rtab": use_rtab,
+                }.items()
             ),
             Node(
                 package="plotjuggler",
