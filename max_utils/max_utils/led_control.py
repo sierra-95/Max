@@ -2,9 +2,9 @@ import RPi.GPIO as GPIO
 import time
 
 # Assign GPIO numbers (BCM mode) to RGB pins
-RED_PIN = 4    # Physical pin 7
-GREEN_PIN = 17 # Physical pin 11
-BLUE_PIN = 27  # Physical pin 13
+RED_PIN = 7    # Physical pin 7
+GREEN_PIN = 8 # Physical pin 11
+BLUE_PIN = 9  # Physical pin 13
 
 # Setup
 GPIO.setmode(GPIO.BCM)
