@@ -3,8 +3,8 @@ import time
 
 # GPIO pins connected to the RGB LED
 RED_PIN = 17
-GREEN_PIN = 27
-BLUE_PIN = 22
+GREEN_PIN = 26
+BLUE_PIN = 24
 
 # Setup
 GPIO.setmode(GPIO.BCM)
