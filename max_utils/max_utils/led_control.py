@@ -1,12 +1,16 @@
-from gpiozero import LED
-from time import sleep
+import RPi.GPIO as GPIO         # Import Raspberry Pi GPIO library
+from time import sleep          # Import the sleep function 
 
-led = LED(17) # Pin 17
+pinLED = 4                      # LED GPIO Pin
 
-while True:
-    led.on()
-    print("LED on")
-    sleep(1)
-    led.off()
-    print("LED off")
-    sleep(1)
+GPIO.setmode(GPIO.BCM)          # Use GPIO pin number
+GPIO.setwarnings(False)         # Ignore warnings in our case
+GPIO.setup(pinLED, GPIO.OUT)    # GPIO pin as output pin
+
+while True:                          # Endless Loop
+    GPIO.output(pinLED, GPIO.HIGH)   # Turn on
+    print("LED on")                    # Prints state to console
+    sleep(1)                         # Pause 1 second
+    GPIO.output(pinLED, GPIO.LOW)    # Turn off
+    print("LED off")                   # Prints state to console
+    sleep(1)                         # Pause 1 second
