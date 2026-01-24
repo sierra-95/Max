@@ -41,13 +41,13 @@ class ProximityLED(Node):
 
         led_off()  # reset LEDs before setting new color
 
-        if closest < 0.2:
+        if closest < 0.35:
             # RED
             GPIO.output(RED_PIN, GPIO.HIGH)
             GPIO.output(GREEN_PIN, GPIO.LOW)
             GPIO.output(BLUE_PIN, GPIO.LOW)
             #print(f"Obstacle very close: {closest:.2f}m - RED ON")
-        elif closest < 0.4:
+        elif closest < 0.55:
             # YELLOW
             GPIO.output(RED_PIN, GPIO.HIGH)
             GPIO.output(GREEN_PIN, GPIO.HIGH)
