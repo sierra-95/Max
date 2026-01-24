@@ -23,6 +23,7 @@ def led_off():
 class ProximityLED(Node):
     def __init__(self):
         super().__init__('proximity_led_node')
+        print("Proximity LED Node Initialized")
         # Subscribe to lidar scan topic
         self.subscription = self.create_subscription(
             LaserScan,
