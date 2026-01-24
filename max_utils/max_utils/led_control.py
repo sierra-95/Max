@@ -14,10 +14,9 @@ GPIO.setup(BLUE_PIN, GPIO.OUT)
 
 # Function to turn off all colors
 def led_off():
-    GPIO.output(RED_PIN, GPIO.LOW)
-    GPIO.output(GREEN_PIN, GPIO.LOW)
-    GPIO.output(BLUE_PIN, GPIO.LOW)
-    print("LEDs off")
+    GPIO.output(RED_PIN, GPIO.HIGH)
+    GPIO.output(GREEN_PIN, GPIO.HIGH)
+    GPIO.output(BLUE_PIN, GPIO.HIGH)
 
 try:
     while True:
