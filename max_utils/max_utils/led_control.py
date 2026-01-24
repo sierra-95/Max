@@ -1,19 +1,12 @@
-import RPi.GPIO as GPIO
-import time
+from gpiozero import LED
+from time import sleep
 
-TEST_PIN = 19  # The pin you want to toggle
+led = LED(17) # Pin 17
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(TEST_PIN, GPIO.OUT)
-
-try:
-    while True:
-        GPIO.output(TEST_PIN, GPIO.HIGH)
-        print("Pin 19 HIGH")
-        time.sleep(1)
-        GPIO.output(TEST_PIN, GPIO.LOW)
-        print("Pin 19 LOW")
-        time.sleep(1)
-except KeyboardInterrupt:
-    GPIO.cleanup()
-    print("GPIO cleaned up")
+while True:
+    led.on()
+    print("LED on")
+    sleep(1)
+    led.off()
+    print("LED off")
+    sleep(1)
