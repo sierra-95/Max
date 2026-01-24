@@ -168,6 +168,11 @@ def generate_launch_description():
                             "use_slam": use_slam,
                             "use_rtab": use_rtab,
                         }.items()
+                    ),
+                    Node(
+                        package="max_utils",
+                        executable="safety_leds.py",
+                        output="screen"
                     )
                 ]
             )
