@@ -189,6 +189,14 @@ Visualization Manager:
           Value: true
         base_link:
           Value: true
+        camera_color_frame:
+          Value: true
+        camera_color_optical_frame:
+          Value: true
+        camera_depth_frame:
+          Value: true
+        camera_depth_optical_frame:
+          Value: true
         camera_link:
           Value: true
         fl_roller_wheel:
@@ -196,6 +204,10 @@ Visualization Manager:
         fr_roller_wheel:
           Value: true
         lidar_link:
+          Value: true
+        map:
+          Value: true
+        max_controller/odom:
           Value: true
         odom:
           Value: true
@@ -209,21 +221,28 @@ Visualization Manager:
       Show Axes: true
       Show Names: false
       Tree:
-        odom:
-          base_footprint:
-            base_link:
-              camera_link:
-                {}
-              fl_roller_wheel:
-                {}
-              fr_roller_wheel:
-                {}
-              lidar_link:
-                {}
-              rl_wheel_link:
-                {}
-              rr_wheel_link:
-                {}
+        base_footprint:
+          base_link:
+            camera_link:
+              camera_color_frame:
+                camera_color_optical_frame:
+                  {}
+              camera_depth_frame:
+                camera_depth_optical_frame:
+                  {}
+            fl_roller_wheel:
+              {}
+            fr_roller_wheel:
+              {}
+            lidar_link:
+              {}
+            rl_wheel_link:
+              {}
+            rr_wheel_link:
+              {}
+        map:
+          max_controller/odom:
+            {}
       Update Interval: 0
       Value: true
     - Alpha: 0.699999988079071
@@ -291,7 +310,7 @@ Visualization Manager:
       Channel Name: intensity
       Class: rviz_default_plugins/PointCloud2
       Color: 255; 255; 255
-      Color Transformer: ""
+      Color Transformer: Intensity
       Decay Time: 0
       Enabled: true
       Invert Rainbow: false
@@ -300,7 +319,7 @@ Visualization Manager:
       Min Color: 0; 0; 0
       Min Intensity: 0
       Name: Odom Last Frame
-      Position Transformer: ""
+      Position Transformer: XYZ
       Selectable: true
       Size (Pixels): 3
       Size (m): 0.009999999776482582
