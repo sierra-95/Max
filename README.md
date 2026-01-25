@@ -1,52 +1,202 @@
 # Project Max
+## Table of Contents
 
-**Max** is a 4-wheeled Autonomous Mobile Robot (AMR) designed for mapping and autonomous navigation using ROS 2 Humble Hawksbill.
+1. [Introduction](#introduction)
+2. [Robot Variants](#robot-variants)
+3. [Concepts](#core-concepts)
+4. [Hardware Components](#hardware-components)
+5. [Getting Started](#getting-started)
+6. [Launching Max](#launching-max)
+7. [License](#license)
+8. [Credits](#credits)
+
+---
+
+## Introduction
+
+**Max** is an Autonomous Mobile Robot (AMR) designed for **mapping, localization, and autonomous navigation** using **ROS 2 Humble Hawksbill**.
+
+The project explores both **LiDAR-based SLAM** and **visual SLAM (VSLAM)**, along with real-world robotic tasks such as object detection and agricultural disease detection.
+
+---
+
+## Robot Variants
+
+Two physical versions of Max were developed:
+
+* **Skid-Steer Robot**
+
+  * LiDAR-based SLAM
+  * Autonomous navigation using Nav2
+  * Potato disease detection (vision-based)
+  * Color cube detection using Logitech camera
+  * Mechanical loading and offloading mechanism
+
+![Skid Steer](images/skid-steer.JPG)
+
+* **Differential Drive Robot**
+
+  * LiDAR-based SLAM
+  * Visual SLAM (VSLAM) using depth camera
+
+![Skid Steer](images/diff-drive.jpg)
+
+---
+
+## Concepts
+
+### SLAM
+
+**Simultaneous Localization and Mapping (SLAM)** is the process of building a map of an unknown environment while simultaneously estimating the robot’s position within that map.
+
+In Max:
+
+* A **2D occupancy grid map** is generated
+* Data sources include:
+
+  * **LiDAR scans**
+  * **Wheel odometry**, computed from encoder counts
+* The resulting map is later used by **Nav2** for autonomous navigation and path planning
+
+![Slam](images/slam.jpeg)
+
+---
+
+### Visual SLAM (VSLAM)
+
+**Visual SLAM (VSLAM)** uses camera data instead of (or in addition to) LiDAR.
+
+In this approach:
+
+* A **3D map or point cloud** is generated
+* A **depth camera** is used to estimate motion and environment structure
+* Compared to 2D SLAM, VSLAM provides more spatial information
+
+> Note: Although LiDAR–VSLAM sensor fusion is possible, this project used **VSLAM independently** without fusion.
+
+![Vslam](images/vslam.png)
+#### Expected TF tree
+![Vslam](images/tf-tree.png)
+---
+
+### Digital Twin
+
+A **Digital Twin** is a virtual representation of the physical robot and its environment.
+
+In Project Max:
+
+* **Gazebo** is used for physics-based simulation
+* **RViz** is used for visualization of:
+
+  * Robot state
+  * Sensor data
+  * TF frames
+  * Maps and navigation goals
+
+This allows:
+
+* Testing navigation stacks before deploying to hardware
+* Debugging perception and localization safely
+---
+
+## Hardware Components
+
+* **Raspberry Pi 4** – Main onboard computer
+* **RPLidar A1** – 2D LiDAR for SLAM and navigation
+* **Orbbec Astra Pro Depth Camera** – Used for VSLAM
+* **Logitech C290 USB Camera** – Used for potato disease detection and color cube detection
+* **JGB37-520 12V 110 RPM DC Motors (with encoders)**
+* **L298N Motor Driver**
+* **20V 2A Ingco Drill Battery** – Power source
+* **Arduino Mega 2560** – Low-level motor control and encoder processing
+
+---
 
 ## Getting Started
 
+### Clone the Repository
+
 ```bash
 # Create workspace
-mkdir max_ws && cd max_ws
+mkdir -p max_ws/src && cd max_ws/src
 
 # Clone repository
 git clone https://github.com/sierra-95/Max.git
-
-# Move source files
-mkdir src && mv Max src/
-
 ```
-## Installation
+
+---
+
+### Install Dependencies
 
 ```bash
-# Update Ros Database
+# Update ROS dependency database
 sudo rosdep update
 
-# Install dependancies
+# Install dependencies
 rosdep install --from-paths src --ignore-src -r -y
 ```
 
+---
+
+### Build the Workspace
+
 ```bash
-# Build the  packages
+# Checkout the preferred branch
+git checkout main
+
+# Build the packages
 colcon build --symlink-install
 . install/setup.bash
 ```
+
+---
+
 ## Launching Max
 
-#### Simulated Robot
+### Simulated Robot
 
 ```bash
-ros2 launch max_bringup max.simulated.launch.py
+ros2 launch max_bringup max.simulated.launch.py world_name:=small_house
 ```
 
-#### Real Robot
+---
+
+### Real Robot
+
+> Add the argument `use_rtab:=true` if using VSLAM.
+
+#### On the Raspberry Pi
 
 ```bash
-ros2 launch max_bringup max.launch.py
-```
 ros2 launch rplidar_ros rplidar_a1_launch.py serial_port:=/dev/ttyUSB0 serial_baudrate:=115200 frame_id:=lidar_link
 
-ros2 launch astra_camera astra_pro.launch.xml
+ros2 launch max_bringup max.launch.py
+```
 
-ros2 launch rtabmap_demos robot_mapping_demo.launch.py \
-  rviz:=true \
-  rtabmap_viz:=true
+#### On the Laptop
+
+```bash
+ros2 launch max_bringup max.launch.py use_master:=true
+
+# If using VSLAM
+ros2 launch astra_camera astra_pro.launch.xml
+```
+
+---
+
+## License
+
+This project is **open source**.
+
+---
+
+## Credits
+
+| Name            | Platform | Profile |
+|-----------------|----------|---------|
+| Michael Machohi | GitHub   | [sierra-95](https://github.com/sierra-95) |
+
+
+![Dojo Image](images/dojo-image.jpg)
+
+---
