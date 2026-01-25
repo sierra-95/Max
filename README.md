@@ -91,8 +91,6 @@ In Max:
 * A **2D occupancy grid map** is generated using **LiDAR scans** and **Wheel odometry**, computed from encoder counts
 * The resulting map is later used by **Nav2** for autonomous navigation and path planning
 
-![Slam](images/slam.jpeg)
-
 ---
 
 ### Visual SLAM (VSLAM)
