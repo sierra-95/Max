@@ -16,7 +16,7 @@ ament_python_install_package(${PROJECT_NAME})
 
 install(PROGRAMS
   ${PROJECT_NAME}/safety_stop.py
-  # ${PROJECT_NAME}/safety_leds.py
+  ${PROJECT_NAME}/safety_leds.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
