@@ -68,11 +68,11 @@ A **Digital Twin** is a virtual representation of the physical robot and its env
 
 In Project Max:
 
-* **Gazebo** is used for physics-based simulation
+* **Gazebo** was used for physics-based simulation
 
 ![Gazebo](images/gazebo.png)
 
-* **RViz** is used for visualization of:
+* **RViz** was used for visualization of:
 
   * Robot state
   * TF Structure
@@ -88,8 +88,8 @@ In Project Max:
 
 In Max:
 
-* A **2D occupancy grid map** is generated using **LiDAR scans** and **Wheel odometry**, computed from encoder counts
-* The resulting map is later used by **Nav2** for autonomous navigation and path planning
+* A **2D occupancy grid map** was generated using **LiDAR scans** and **Wheel odometry**, computed from encoder counts
+* The resulting map was later used by **Nav2** for autonomous navigation and path planning
 
 ---
 
