@@ -37,6 +37,7 @@ max_controller:
     wheel_separation_multiplier: 1.0  
     
     cmd_vel_timeout: 0.25
+    odom_frame_id: odom
     base_frame_id: base_footprint
     publish_limited_velocity: true
     publish_wheel_data: true

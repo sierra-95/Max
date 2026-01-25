@@ -112,7 +112,7 @@ def generate_launch_description():
             #             'camera_info_topic': '/camera/color/camera_info',
             #             'frame_id': 'base_footprint',
             #             'odom_topic': '/max_controller/odom',
-            #             'odom_frame_id': 'max_controller/odom',
+            #             # 'odom_frame_id': 'max_controller/odom',
             #             # 'rviz': 'true',
             #             # 'subscribe_scan': 'true',
             #             'approx_sync': 'true',
