@@ -33,7 +33,7 @@ Two physical versions of Max were developed:
 
 ![Skid Steer](images/skid-steer.JPG)
 
-* **Differential Drive Robot**
+* **Differential Drive Robot - Beta**
 
   * LiDAR-based SLAM
   * Visual SLAM (VSLAM) using depth camera
@@ -47,7 +47,7 @@ Two physical versions of Max were developed:
 
 ## Project Implementation
 
-### Hardware Components
+### 1. Hardware Components
 
 * **Raspberry Pi 4** – Main onboard computer
 * **RPLidar A1** – 2D LiDAR for SLAM and navigation
@@ -60,9 +60,9 @@ Two physical versions of Max were developed:
 
 ---
 
-### PCB
-![PCB](images/electrical.jpg)
-### Digital Twin
+### 2. Electrical design
+![PCB](images/electrical.jpeg)
+### 3. Digital Twin
 
 A **Digital Twin** is a virtual representation of the physical robot and its environment.
 
@@ -79,10 +79,10 @@ In Project Max:
   * Maps and navigation goals
 
 ![Rviz](images/rviz.png)
-#### VSLAM TF tree
+#### TF tree
 ![Vslam](images/tf-tree.png)
 ---
-### SLAM
+### 4. SLAM
 
 **Simultaneous Localization and Mapping (SLAM)** is the process of building a map of an unknown environment while simultaneously estimating the robot’s position within that map.
 
@@ -93,7 +93,7 @@ In Max:
 
 ---
 
-### Visual SLAM (VSLAM)
+### 5. Visual SLAM (VSLAM)
 
 **Visual SLAM (VSLAM)** uses camera data instead of (or in addition to) LiDAR.
 
