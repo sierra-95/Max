@@ -1,12 +1,13 @@
+#!/usr/bin/env python3
 import os
 import requests
+import time
+from pathlib import Path
 
-BACKEND_URL = "https://backend.michaelmachohi.com"
-USER_ID = "f47ac10b-58cc-4372-a567-0e02b2c3d479"
-CLOUDFLARE_R2_BUCKET = "MEDIA_BUCKET"
-CLOUDFLARE_R2_PUBLIC_URL = "https://files.michaelmachohi.com"
+from credentials import BACKEND_URL, USER_ID, CLOUDFLARE_R2_BUCKET, CLOUDFLARE_R2_PUBLIC_URL
 
-MAPS_DIR = "/home/sierra-95/Documents/agv/max_ws/src/Max/max_mapping/maps"
+MAPS_DIR = Path(__file__).parents[1] / "maps"
+MAPS_DIR = str(MAPS_DIR.resolve())
 
 def get_cloud_files():
     """Fetch existing files for the user from R2"""
@@ -51,6 +52,11 @@ def upload_file(file_path):
     print(f"Uploaded {file_name} to {category}")
 
 def sync_maps():
+    if not os.path.exists(MAPS_DIR):
+        print(f"Maps directory {MAPS_DIR} does not exist.")
+        return
+    print("Cloud Sync started")
+    
     cloud_files = get_cloud_files()
     local_files = find_local_files()
 
@@ -59,5 +65,15 @@ def sync_maps():
         if file_name not in cloud_files:
             upload_file(file_path)
 
+SYNC_INTERVAL = 20 * 60
+
+def continuous_sync():
+    while True:
+        try:
+            sync_maps()
+        except Exception as e:
+            print(f"Error during sync: {e}")
+        time.sleep(SYNC_INTERVAL)
+
 if __name__ == "__main__":
-    sync_maps()
+    continuous_sync()
