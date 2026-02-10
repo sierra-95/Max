@@ -113,7 +113,7 @@ def generate_launch_description():
                         'frame_id': 'base_footprint',
                         'odom_topic': '/max_controller/odom',
                         'odom_frame_id': 'odom',
-                        # 'rviz': 'true',
+                        'rviz': 'true',
                         # 'subscribe_scan': 'true',
                         'approx_sync': 'true',
                         'rtabmap_args': '--delete_db_on_start'

@@ -45,7 +45,7 @@ double left_wheel_cmd = 0.0;              // 0-255
 double Kp_r = 11.5;
 double Ki_r = 7.5;
 double Kd_r = 0.1;
-double Kp_l = 12.8;
+double Kp_l = 11.5;
 double Ki_l = 8.3;
 double Kd_l = 0.1;
 // Controller
