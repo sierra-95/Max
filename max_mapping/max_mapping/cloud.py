@@ -23,14 +23,12 @@ def get_cloud_files():
     return cloud_files
 
 def find_local_files():
-    """Walk maps dir and collect .pgm and .yaml files"""
+    """Collect .pgm and .yaml files directly inside MAPS_DIR (no subfolders)"""
     local_files = []
-    for folder in os.listdir(MAPS_DIR):
-        folder_path = os.path.join(MAPS_DIR, folder)
-        if os.path.isdir(folder_path):
-            for file_name in os.listdir(folder_path):
-                if file_name.endswith(".pgm") or file_name.endswith(".yaml"):
-                    local_files.append(os.path.join(folder_path, file_name))
+    if os.path.exists(MAPS_DIR):
+        for file_name in os.listdir(MAPS_DIR):
+            if file_name.endswith(".pgm") or file_name.endswith(".yaml"):
+                local_files.append(os.path.join(MAPS_DIR, file_name))
     return local_files
 
 def upload_file(file_path):
