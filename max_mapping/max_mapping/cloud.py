@@ -4,7 +4,10 @@ import requests
 import time
 from pathlib import Path
 
-from credentials import BACKEND_URL, USER_ID, CLOUDFLARE_R2_BUCKET, CLOUDFLARE_R2_PUBLIC_URL
+BACKEND_URL = "https://backend.michaelmachohi.com"
+USER_ID = "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+CLOUDFLARE_R2_BUCKET = "MEDIA_BUCKET"
+CLOUDFLARE_R2_PUBLIC_URL = "https://files.michaelmachohi.com"
 
 MAPS_DIR = Path(__file__).parents[1] / "maps"
 MAPS_DIR = str(MAPS_DIR.resolve())
