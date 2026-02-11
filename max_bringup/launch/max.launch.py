@@ -95,32 +95,32 @@ def generate_launch_description():
                 name="plotjuggler",
                 output="screen",
             ),
-            GroupAction(
-                condition=IfCondition(use_rtab),
-                actions=[
-                IncludeLaunchDescription(
-                    PythonLaunchDescriptionSource(
-                        os.path.join(
-                            get_package_share_directory('rtabmap_launch'),
-                            'launch',
-                            'rtabmap.launch.py'
-                        )
-                    ),
-                    launch_arguments={
-                        'depth_topic': '/camera/depth/image_raw',
-                        'rgb_topic': '/camera/color/image_raw',
-                        'camera_info_topic': '/camera/color/camera_info',
-                        'frame_id': 'base_footprint',
-                        'odom_topic': '/max_controller/odom',
-                        'odom_frame_id': 'odom',
-                        'rviz': 'true',
-                        # 'subscribe_scan': 'true',
-                        'approx_sync': 'true',
-                        'rtabmap_args': '--delete_db_on_start'
-                    }.items()
-                )
-                ]
-            )
+            # GroupAction(
+            #     condition=IfCondition(use_rtab),
+            #     actions=[
+            #     IncludeLaunchDescription(
+            #         PythonLaunchDescriptionSource(
+            #             os.path.join(
+            #                 get_package_share_directory('rtabmap_launch'),
+            #                 'launch',
+            #                 'rtabmap.launch.py'
+            #             )
+            #         ),
+            #         launch_arguments={
+            #             'depth_topic': '/camera/depth/image_raw',
+            #             'rgb_topic': '/camera/color/image_raw',
+            #             'camera_info_topic': '/camera/color/camera_info',
+            #             'frame_id': 'base_footprint',
+            #             'odom_topic': '/max_controller/odom',
+            #             'odom_frame_id': 'odom',
+            #             'rviz': 'true',
+            #             # 'subscribe_scan': 'true',
+            #             'approx_sync': 'true',
+            #             'rtabmap_args': '--delete_db_on_start'
+            #         }.items()
+            #     )
+            #     ]
+            # )
         ]
     )
     slave = GroupAction(
